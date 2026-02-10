@@ -23,5 +23,57 @@
       "files": ["SKILL.md"],
       "updatedAt": "2026-02-10T00:00:00Z"
     }
+  ],
+  "prompts": [
+    {
+      "id": "code-explain",
+      "name": "代码解释器",
+      "description": "用简洁中文解释代码的功能、核心逻辑和关键细节",
+      "version": "1.0.0",
+      "author": "HydroCoder",
+      "tags": ["code", "explain", "learning"]
+    },
+    {
+      "id": "api-doc-generator",
+      "name": "API 文档生成器",
+      "description": "根据代码/函数签名自动生成标准 API 文档",
+      "version": "1.0.0",
+      "author": "HydroCoder",
+      "tags": ["api", "docs", "generator"]
+    },
+    {
+      "id": "sql-optimizer",
+      "name": "SQL 优化顾问",
+      "description": "分析 SQL 查询并给出索引建议、查询重写和性能优化方案",
+      "version": "1.0.0",
+      "author": "HydroCoder",
+      "tags": ["sql", "database", "performance"]
+    }
+  ],
+  "agents": [
+    {
+      "id": "refactor-advisor",
+      "name": "重构顾问",
+      "description": "代码重构顾问，分析代码坏味道并提供重构方案",
+      "version": "1.0.0",
+      "author": "HydroCoder",
+      "tags": ["refactor", "code-quality"]
+    },
+    {
+      "id": "test-writer",
+      "name": "测试编写专家",
+      "description": "根据代码自动生成全面的单元测试",
+      "version": "1.0.0",
+      "author": "HydroCoder",
+      "tags": ["test", "unit-test", "automation"]
+    },
+    {
+      "id": "changelog-writer",
+      "name": "变更日志生成器",
+      "description": "基于 git log 自动生成结构化 CHANGELOG",
+      "version": "1.0.0",
+      "author": "HydroCoder",
+      "tags": ["changelog", "docs", "release"]
+    }
   ]
 }
