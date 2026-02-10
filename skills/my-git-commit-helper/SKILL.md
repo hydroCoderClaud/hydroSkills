@@ -1,5 +1,5 @@
 ---
-name: git-commit-helper
+name: my-git-commit-helper
 description: Git 提交助手，帮助生成规范的 commit message。当用户要求"写commit"、"提交信息"、"commit message"时自动触发。
 ---
 

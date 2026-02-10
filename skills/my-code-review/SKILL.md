@@ -1,5 +1,5 @@
 ---
-name: code-review
+name: my-code-review
 description: 代码审查技能，分析代码质量并给出改进建议。当用户要求"代码审查"、"review代码"、"检查代码质量"时自动触发。
 ---
 
