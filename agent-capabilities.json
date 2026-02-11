@@ -4,11 +4,12 @@
     {
       "id": "code-review",
       "name": "代码审查",
-      "description": "AI 驱动的代码审查与改进建议，包含代码审查技能和重构顾问",
+      "description": "AI 驱动的代码审查与改进建议，包含代码审查技能、重构顾问和官方代码审查插件",
       "icon": "search",
       "components": [
         { "type": "skill", "id": "my-code-review" },
-        { "type": "agent", "id": "refactor-advisor" }
+        { "type": "agent", "id": "refactor-advisor" },
+        { "type": "plugin", "id": "code-review@claude-plugins-official" }
       ]
     },
     {
@@ -28,6 +29,49 @@
       "components": [
         { "type": "skill", "id": "my-git-commit-helper" },
         { "type": "agent", "id": "changelog-writer" }
+      ]
+    },
+    {
+      "id": "code-intelligence",
+      "name": "代码智能",
+      "description": "LSP 语言服务支持，提供 TypeScript 和 Python 的代码导航、补全与诊断能力",
+      "icon": "code",
+      "components": [
+        { "type": "plugin", "id": "typescript-lsp@claude-plugins-official" },
+        { "type": "plugin", "id": "pyright-lsp@claude-plugins-official" },
+        { "type": "plugin", "id": "serena@claude-plugins-official" }
+      ]
+    },
+    {
+      "id": "code-quality",
+      "name": "代码质量",
+      "description": "代码简化与前端设计，保持代码整洁和 UI 高质量输出",
+      "icon": "star",
+      "components": [
+        { "type": "plugin", "id": "code-simplifier@claude-plugins-official" },
+        { "type": "plugin", "id": "frontend-design@claude-code-plugins" }
+      ]
+    },
+    {
+      "id": "documentation",
+      "name": "文档技能",
+      "description": "全面的文档创作能力：Word、PDF、PPT、Excel 等多格式文档生成与处理",
+      "icon": "fileText",
+      "components": [
+        { "type": "plugin", "id": "document-skills@anthropic-agent-skills" },
+        { "type": "plugin", "id": "context7@claude-plugins-official" }
+      ]
+    },
+    {
+      "id": "developer-tools",
+      "name": "开发者工具",
+      "description": "插件开发、Agent SDK 和高级开发工作流增强",
+      "icon": "plugin",
+      "components": [
+        { "type": "plugin", "id": "plugin-dev@claude-code-plugins" },
+        { "type": "plugin", "id": "agent-sdk-dev@claude-code-plugins" },
+        { "type": "plugin", "id": "superpowers@superpowers-marketplace" },
+        { "type": "plugin", "id": "superpowers-developing-for-claude-code@superpowers-marketplace" }
       ]
     }
   ]
