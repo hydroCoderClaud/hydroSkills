@@ -1,0 +1,34 @@
+{
+  "version": "1.0",
+  "capabilities": [
+    {
+      "id": "code-review",
+      "name": "代码审查",
+      "description": "AI 驱动的代码审查与改进建议，包含代码审查技能和重构顾问",
+      "icon": "search",
+      "components": [
+        { "type": "skill", "id": "my-code-review" },
+        { "type": "agent", "id": "refactor-advisor" }
+      ]
+    },
+    {
+      "id": "test-automation",
+      "name": "自动化测试",
+      "description": "根据代码自动生成全面的单元测试，提升代码质量保障",
+      "icon": "check",
+      "components": [
+        { "type": "agent", "id": "test-writer" }
+      ]
+    },
+    {
+      "id": "git-workflow",
+      "name": "Git 工作流",
+      "description": "规范化 Git 工作流：自动生成 Conventional Commits 提交信息与结构化 CHANGELOG",
+      "icon": "git",
+      "components": [
+        { "type": "skill", "id": "my-git-commit-helper" },
+        { "type": "agent", "id": "changelog-writer" }
+      ]
+    }
+  ]
+}
