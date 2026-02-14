@@ -96,7 +96,8 @@ agents/{agent-id}.md
 | `icon` | string | 是 | 图标名。可选值：`search`、`check`、`git`、`code`、`star`、`fileText`、`plugin` |
 | `type` | string | 是 | 组件类型：`skill`、`agent`、`plugin` |
 | `componentId` | string | 是 | 关联的组件标识（见下方说明） |
-| `category` | string | 是 | 功能分类（见下方说明） |
+| `category` | string | 是 | 功能分类标识（见下方说明） |
+| `categoryName` | object | 是 | 分类的多语言显示名称，含 `zh-CN` 和 `en-US` 字段 |
 
 ### componentId 格式
 
@@ -107,17 +108,18 @@ agents/{agent-id}.md
 
 ### category 分类
 
-| 分类 | 说明 |
-|------|------|
-| `code-review` | 代码审查相关 |
-| `test-automation` | 测试自动化 |
-| `git-workflow` | Git 工作流 |
-| `code-intelligence` | 代码智能（LSP、语义搜索） |
-| `code-quality` | 代码质量与优化 |
-| `documentation` | 文档相关 |
-| `developer-tools` | 开发者工具 |
+| 分类 | categoryName (zh-CN) | categoryName (en-US) |
+|------|------|------|
+| `code-review` | 代码审查 | Code Review |
+| `test-automation` | 测试自动化 | Test Automation |
+| `git-workflow` | Git 工作流 | Git Workflow |
+| `code-intelligence` | 代码智能 | Code Intelligence |
+| `code-quality` | 代码质量 | Code Quality |
+| `documentation` | 文档处理 | Documentation |
+| `developer-tools` | 开发者工具 | Developer Tools |
+| `creative` | 创意工具 | Creative Tools |
 
-添加新分类时保持 kebab-case 命名风格。
+添加新分类时：`category` 保持 kebab-case，`categoryName` 必须同时提供中英文。
 
 ### 核心设计原则
 

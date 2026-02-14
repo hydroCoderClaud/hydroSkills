@@ -8,7 +8,11 @@
       "icon": "fileText",
       "type": "plugin",
       "componentId": "document-skills@anthropic-agent-skills",
-      "category": "documentation"
+      "category": "documentation",
+      "categoryName": {
+        "zh-CN": "文档处理",
+        "en-US": "Documentation"
+      }
     },
     {
       "id": "remotion-video",
@@ -17,7 +21,11 @@
       "icon": "star",
       "type": "skill",
       "componentId": "remotion-video",
-      "category": "creative"
+      "category": "creative",
+      "categoryName": {
+        "zh-CN": "创意工具",
+        "en-US": "Creative Tools"
+      }
     }
   ]
 }
