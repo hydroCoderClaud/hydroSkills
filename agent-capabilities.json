@@ -8,6 +8,7 @@
       "icon": "fileText",
       "type": "plugin",
       "componentId": "document-skills@anthropic-agent-skills",
+      "marketplace": "anthropics/skills",
       "category": "documentation",
       "categoryName": {
         "zh-CN": "文档处理",
