@@ -1,0 +1,12 @@
+{
+  "filesystem": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-filesystem"
+    ],
+    "env": {
+      "MCP_SERVER_FILESYSTEM_ROOT": "."
+    }
+  }
+}

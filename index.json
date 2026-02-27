@@ -88,13 +88,13 @@
   ],
   "mcps": [
     {
-      "id": "context7",
-      "name": "Context7 MCP",
-      "description": "Upstash Context7 MCP 服务，提供文档上下文查询",
+      "id": "filesystem",
+      "name": "Filesystem MCP",
+      "description": "文件系统 MCP 服务，允许 Claude Code 安全地访问指定目录的文件",
       "version": "1.0.0",
-      "author": "HydroCoder",
-      "tags": ["mcp", "context", "documentation"],
-      "files": ["context7.mcp.json"]
+      "author": "Anthropic",
+      "tags": ["mcp", "filesystem", "files"],
+      "files": ["filesystem.mcp.json"]
     }
   ]
 }
