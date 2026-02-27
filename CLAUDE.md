@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 仓库概述
 
-本仓库是 **Claude Code Desktop (cc-desktop)** 统一组件市场的远程注册表。包含三类组件：Skills（技能）、Prompts（提示词）、Agents（智能体），以及一个能力清单文件。
+本仓库是 **Claude Code Desktop (cc-desktop)** 统一组件市场的远程注册表。包含四类组件：Skills（技能）、Prompts（提示词）、Agents（智能体）、MCPs（MCP 配置模板），以及一个能力清单文件。
 
 cc-desktop 通过 `{registryUrl}/index.json` 发现和安装组件。用户在 cc-desktop「全局设置 → 组件市场 → 仓库地址」中填入本仓库 Raw URL 即可使用。
 
@@ -24,6 +24,7 @@ cc-desktop 通过 `{registryUrl}/index.json` 发现和安装组件。用户在 c
 4. **ID = 文件路径**：组件 `id` 直接决定文件位置。ID 只允许 `[a-z0-9-]`
 5. **name 一致性**：Skill 的 frontmatter `name` = 目录名；Agent 的 frontmatter `name` = 文件名（不含 `.md`）
 6. **agent-capabilities.json 同步**：添加新组件时，评估是否需要在 agent-capabilities.json 中添加对应能力条目
+7. **MCP id = 服务器名**：MCP 条目的 `id` 字段**必须**与配置文件（`.mcp.json`）中 `mcpServers` 的 JSON key（服务器名）保持一致。cc-desktop 通过 `item.id` 查找已安装状态，若不一致则已安装检测失效。例如：`id: "context7"` → 配置文件中必须有 `{ "context7": { ... } }`
 
 ## index.json 结构
 
@@ -40,7 +41,7 @@ cc-desktop 通过 `{registryUrl}/index.json` 发现和安装组件。用户在 c
 
 每个组件条目必填字段：`id`、`version`。可选：`name`、`description`、`author`、`tags`。
 
-Skills 额外支持 `files`（默认 `["SKILL.md"]`）和 `updatedAt`。Prompts/Agents 额外支持 `file`（默认 `{id}.md`）。
+Skills 额外支持 `files`（默认 `["SKILL.md"]`）和 `updatedAt`。Prompts/Agents 额外支持 `file`（默认 `{id}.md`）。MCPs 额外支持 `files`（默认 `["{id}.mcp.json"]`）。
 
 ## 三类组件的格式差异
 
@@ -67,6 +68,122 @@ agents/{agent-id}.md
 ```
 
 必须包含 YAML frontmatter（`name` + `description`，可选 `color`）。`color` 可选值：`blue`、`ocean`、`forest`、`violet`、`ember`、`red`、`gray`。正文是 Agent 被调用时的系统提示。
+
+### MCPs — 单 JSON 文件
+
+```
+mcps/{mcp-id}/{mcp-id}.mcp.json
+```
+
+纯 JSON，格式为 `{ "服务器名": { "command": "...", "args": [...] } }`。**不使用 `mcpServers` 包装层**（`mcpServers` 包装是 `~/.claude.json` 的格式，市场分发文件使用平铺格式）。**服务器名必须与 index.json 中的 `id` 字段完全一致**（见一致性规则第 7 条）。可通过 index.json `files` 数组声明多个文件，cc-desktop 以 `files[0]` 为主配置文件。
+
+## MCP 编写规范
+
+### 配置文件格式
+
+市场 MCP 配置文件使用**平铺格式**，顶层 key 即为服务器名：
+
+```json
+{
+  "context7": {
+    "command": "npx",
+    "args": ["-y", "@upstash/context7-mcp"]
+  }
+}
+```
+
+**禁止**使用 `mcpServers` 包装层：
+
+```json
+// ❌ 错误 — mcpServers 包装是 ~/.claude.json 的格式
+{
+  "mcpServers": {
+    "context7": { "command": "npx", "args": ["-y", "@upstash/context7-mcp"] }
+  }
+}
+```
+
+### 服务器配置字段
+
+| 字段 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `command` | string | 与 `url` 二选一 | 可执行文件，如 `npx`、`node`、`python` |
+| `args` | string[] | 否 | 命令行参数数组 |
+| `env` | object | 否 | 环境变量键值对，敏感值用占位符 |
+| `url` | string | 与 `command` 二选一 | SSE/HTTP 服务地址 |
+| `type` | string | 否 | 传输类型：`stdio`（默认）或 `sse` |
+
+### 两种传输类型
+
+**stdio 类型**（本地进程，最常见）：
+
+```json
+{
+  "context7": {
+    "command": "npx",
+    "args": ["-y", "@upstash/context7-mcp"]
+  }
+}
+```
+
+**SSE/HTTP 类型**（远程服务）：
+
+```json
+{
+  "my-remote-server": {
+    "url": "https://example.com/mcp/sse",
+    "type": "sse"
+  }
+}
+```
+
+### 环境变量处理
+
+需要用户填写的敏感配置（API Key 等）使用占位符，并在 index.json `description` 中说明：
+
+```json
+{
+  "my-server": {
+    "command": "npx",
+    "args": ["-y", "my-mcp-server"],
+    "env": {
+      "MY_API_KEY": "your-api-key-here"
+    }
+  }
+}
+```
+
+### index.json 中的 MCP 条目
+
+```json
+{
+  "id": "context7",
+  "name": "Context7",
+  "description": "为 LLM 提供最新的库文档和代码示例",
+  "version": "1.0.0",
+  "author": "Upstash",
+  "tags": ["documentation", "context"],
+  "files": ["context7.mcp.json"]
+}
+```
+
+| 字段 | 必填 | 说明 |
+|------|------|------|
+| `id` | 是 | 唯一标识，**必须**与配置文件中的服务器名一致（见一致性规则第 7 条） |
+| `version` | 是 | 语义化版本号，格式 `x.y.z` |
+| `name` | 否 | 显示名称（默认显示 `id`） |
+| `description` | 否 | 功能描述，建议说明所需环境变量 |
+| `files` | 否 | 配置文件列表，默认 `["{id}.mcp.json"]` |
+
+### 目录结构
+
+```
+mcps/
+└── context7/
+    └── context7.mcp.json
+```
+
+文件名与 `id` 保持一致（`{id}.mcp.json`），除非有多文件需求时通过 `files` 字段显式声明。
 
 ## agent-capabilities.json 能力清单规范
 
