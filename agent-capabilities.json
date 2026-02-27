@@ -16,6 +16,19 @@
       }
     },
     {
+      "id": "filesystem",
+      "name": "文件系统",
+      "description": "通过 MCP 协议访问本地文件系统，支持读写文件、列目录等操作",
+      "icon": "folder",
+      "type": "mcp",
+      "componentId": "filesystem",
+      "category": "tools",
+      "categoryName": {
+        "zh-CN": "工具",
+        "en-US": "Tools"
+      }
+    },
+    {
       "id": "remotion-video",
       "name": "视频创作",
       "description": "使用 Remotion 框架从零开始制作视频，含自动安装与渲染",
