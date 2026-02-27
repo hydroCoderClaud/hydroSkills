@@ -85,5 +85,16 @@
       "author": "HydroCoder",
       "tags": ["changelog", "docs", "release"]
     }
+  ],
+  "mcps": [
+    {
+      "id": "context7",
+      "name": "Context7 MCP",
+      "description": "Upstash Context7 MCP 服务，提供文档上下文查询",
+      "version": "1.0.0",
+      "author": "HydroCoder",
+      "tags": ["mcp", "context", "documentation"],
+      "files": ["context7.mcp.json"]
+    }
   ]
 }
