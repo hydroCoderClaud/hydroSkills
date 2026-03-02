@@ -1,7 +1,7 @@
 {
   "version": 1,
   "name": "HydroSkills Registry",
-  "updatedAt": "2026-02-14T00:00:00Z",
+  "updatedAt": "2026-03-02T00:00:00Z",
   "skills": [
     {
       "id": "my-code-review",
@@ -95,6 +95,15 @@
       "author": "Anthropic",
       "tags": ["mcp", "filesystem", "files"],
       "files": ["filesystem.mcp.json"]
+    },
+    {
+      "id": "mcp-image",
+      "name": "Gemini 文生图",
+      "description": "基于 Google Gemini (Nano Banana 2) 的 AI 图片生成，支持自动 prompt 优化和质量预设。需设置 GEMINI_API_KEY 和 IMAGE_OUTPUT_DIR",
+      "version": "1.0.0",
+      "author": "shinpr",
+      "tags": ["mcp", "image", "gemini", "text-to-image"],
+      "files": ["mcp-image.mcp.json"]
     }
   ]
 }
