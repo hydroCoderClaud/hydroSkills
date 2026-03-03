@@ -5,6 +5,7 @@
     "env": {
       "GEMINI_API_KEY": "your-gemini-api-key-here",
       "IMAGE_OUTPUT_DIR": "/path/to/image-output"
-    }
+    },
+    "tools": ["generate_image"]
   }
 }
