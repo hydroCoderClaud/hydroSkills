@@ -42,6 +42,19 @@
       }
     },
     {
+      "id": "remotion-best-practices",
+      "name": "Remotion 最佳实践",
+      "description": "Remotion 官方最佳实践知识库，涵盖动画、字幕、音频、3D 等 30+ 领域规则",
+      "icon": "code",
+      "type": "skill",
+      "componentId": "remotion-best-practices",
+      "category": "creative",
+      "categoryName": {
+        "zh-CN": "创意工具",
+        "en-US": "Creative Tools"
+      }
+    },
+    {
       "id": "mcp-image",
       "name": "图像生成",
       "description": "通过 Gemini API 生成图像，支持自定义输出目录",
