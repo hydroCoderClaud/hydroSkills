@@ -112,6 +112,39 @@ mcps/{mcp-id}/{mcp-id}.mcp.json
 | `env` | object | 否 | 环境变量键值对，敏感值用占位符 |
 | `url` | string | 与 `command` 二选一 | SSE/HTTP 服务地址 |
 | `type` | string | 否 | 传输类型：`stdio`（默认）或 `sse` |
+| `tools` | string[] | 否 | **自定义扩展字段**，见下方说明 |
+
+### tools 字段（自定义扩展）
+
+`tools` 是本注册表的**自定义扩展字段**，不属于 Claude Code CLI 的标准 MCP 配置。cc-desktop 安装 MCP 时会读取此字段，自动将工具权限写入 `~/.claude/settings.json` 的 `permissions.allow`，免去用户手动授权。写入 `~/.claude.json` 时会自动剔除该字段，不影响 CLI 解析。
+
+**权限格式**：`mcp__<serverName>__<toolName>`
+
+**示例**：
+
+```json
+{
+  "mcp-image": {
+    "command": "npx",
+    "args": ["-y", "mcp-image"],
+    "env": {
+      "GEMINI_API_KEY": "your-gemini-api-key-here"
+    },
+    "tools": ["generate_image"]
+  }
+}
+```
+
+安装后，`~/.claude/settings.json` 中自动添加 `"mcp__mcp-image__generate_image"`。卸载时按前缀 `mcp__mcp-image__` 自动清理。
+
+**如何获取工具名称**：
+
+1. **MCP Inspector**（推荐）：`npx @modelcontextprotocol/inspector`，连接到 MCP 服务器后界面直接列出所有工具名
+2. **Claude Code CLI**：在已安装该 MCP 的项目中执行 `/mcp`，查看工具列表
+3. **查看源码或官方文档**：如 npm 包的 README 通常会列出所有工具
+4. **查看已授权记录**：`~/.claude/settings.json` 的 `permissions.allow` 中已授权的条目可直接提取工具名
+
+**编写要求**：`tools` 数组应尽量填写完整，覆盖该 MCP 暴露的所有工具，确保用户安装后无需逐个手动授权。
 
 ### 两种传输类型
 
@@ -210,15 +243,15 @@ mcps/
 | `id` | string | 是 | 能力唯一标识，同一文件内不可重复 |
 | `name` | string | 是 | 显示名称，展示在能力卡片上 |
 | `description` | string | 是 | 能力描述，展示在卡片副标题 |
-| `icon` | string | 是 | 图标名。可选值：`search`、`check`、`git`、`code`、`star`、`fileText`、`plugin` |
-| `type` | string | 是 | 组件类型：`skill`、`agent`、`plugin` |
+| `icon` | string | 是 | 图标名。可选值：`search`、`check`、`git`、`code`、`star`、`fileText`、`plugin`、`folder`、`image` 等（参见 cc-desktop Icon 组件） |
+| `type` | string | 是 | 组件类型：`skill`、`agent`、`plugin`、`mcp` |
 | `componentId` | string | 是 | 关联的组件标识（见下方说明） |
 | `category` | string | 是 | 功能分类标识（见下方说明） |
 | `categoryName` | object | 是 | 分类的多语言显示名称，含 `zh-CN` 和 `en-US` 字段 |
 
 ### componentId 格式
 
-- **本仓库组件**（skill/agent）：直接使用 index.json 中的 `id`，如 `"my-code-review"`
+- **本仓库组件**（skill/agent/mcp）：直接使用 index.json 中的 `id`，如 `"my-code-review"`、`"filesystem"`
 - **第三方插件**（plugin）：格式为 `{pluginId}@{marketplace}`，如 `"serena@claude-plugins-official"`
 
 当前出现的 marketplace 标识：`claude-plugins-official`、`claude-code-plugins`、`anthropic-agent-skills`、`superpowers-marketplace`。
@@ -235,6 +268,7 @@ mcps/
 | `documentation` | 文档处理 | Documentation |
 | `developer-tools` | 开发者工具 | Developer Tools |
 | `creative` | 创意工具 | Creative Tools |
+| `tools` | 实用工具 | Utility Tools |
 
 添加新分类时：`category` 保持 kebab-case，`categoryName` 必须同时提供中英文。
 
@@ -249,6 +283,16 @@ mcps/
 git add skills/new-skill index.json && git commit -m "feat: 添加 new-skill"
 git add prompts/new-prompt.md index.json && git commit -m "feat: 添加 new-prompt"
 git add agents/new-agent.md index.json && git commit -m "feat: 添加 new-agent"
+git add mcps/new-mcp index.json && git commit -m "feat: 添加 new-mcp"
 ```
+
+### 添加新 MCP 的完整步骤
+
+1. 创建目录和配置文件：`mcps/{id}/{id}.mcp.json`
+2. 填写服务器配置（command/args/env）
+3. 用 MCP Inspector（`npx @modelcontextprotocol/inspector`）获取所有工具名，填入 `tools` 数组
+4. 在 `index.json` 的 `mcps` 数组中添加条目（id/name/description/version/files）
+5. 评估是否需要在 `agent-capabilities.json` 中添加能力条目（type: `"mcp"`）
+6. 更新 `index.json` 顶层 `updatedAt` 时间戳
 
 Commit message 风格：`feat: 添加 xxx`、`fix: 修复 xxx`、`docs: 更新 xxx`。
