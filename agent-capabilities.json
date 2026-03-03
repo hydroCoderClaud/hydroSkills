@@ -40,6 +40,19 @@
         "zh-CN": "创意工具",
         "en-US": "Creative Tools"
       }
+    },
+    {
+      "id": "mcp-image",
+      "name": "图像生成",
+      "description": "通过 Gemini API 生成图像，支持自定义输出目录",
+      "icon": "image",
+      "type": "mcp",
+      "componentId": "mcp-image",
+      "category": "creative",
+      "categoryName": {
+        "zh-CN": "创意工具",
+        "en-US": "Creative Tools"
+      }
     }
   ]
 }
