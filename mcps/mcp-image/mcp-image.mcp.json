@@ -4,7 +4,7 @@
     "args": ["-y", "mcp-image"],
     "env": {
       "GEMINI_API_KEY": "your-gemini-api-key-here",
-      "IMAGE_OUTPUT_DIR": "/path/to/image-output"
+      "IMAGE_OUTPUT_DIR": "."
     },
     "tools": ["generate_image"]
   }
