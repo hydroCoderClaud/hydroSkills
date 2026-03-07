@@ -66,6 +66,19 @@
         "zh-CN": "创意工具",
         "en-US": "Creative Tools"
       }
+    },
+    {
+      "id": "xiaofangmcp",
+      "name": "消防考试知识库",
+      "description": "消防员考试知识库 MCP 服务，支持查询知识库列表和 RAG 对话",
+      "icon": "search",
+      "type": "mcp",
+      "componentId": "xiaofangmcp",
+      "category": "tools",
+      "categoryName": {
+        "zh-CN": "工具",
+        "en-US": "Tools"
+      }
     }
   ]
 }

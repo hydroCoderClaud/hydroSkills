@@ -1,7 +1,7 @@
 {
   "version": 1,
   "name": "HydroSkills Registry",
-  "updatedAt": "2026-03-03T00:00:00Z",
+  "updatedAt": "2026-03-07T00:00:00Z",
   "skills": [
     {
       "id": "my-code-review",
@@ -156,6 +156,14 @@
       "author": "shinpr",
       "tags": ["mcp", "image", "gemini", "text-to-image"],
       "files": ["mcp-image.mcp.json"]
+    },
+    {
+      "id": "xiaofangmcp",
+      "name": "消防考试知识库",
+      "description": "消防员考试知识库 MCP 服务，支持查询知识库列表和 RAG 对话",
+      "version": "1.0.0",
+      "tags": ["mcp", "knowledge-base", "rag"],
+      "files": ["xiaofangmcp.mcp.json"]
     }
   ]
 }

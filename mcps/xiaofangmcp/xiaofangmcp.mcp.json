@@ -1,0 +1,10 @@
+{
+  "xiaofangmcp": {
+    "type": "http",
+    "url": "https://zsk.hydrocoder.com/mcp/stream",
+    "tools": [
+      "mcp_______list_knowledge_bases",
+      "mcp_______rag_chat"
+    ]
+  }
+}
