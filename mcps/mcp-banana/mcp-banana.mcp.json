@@ -6,6 +6,6 @@
       "GEMINI_API_KEY": "your-gemini-api-key-here",
       "IMAGE_OUTPUT_DIR": "."
     },
-    "tools": ["deal_image"]
+    "tools": ["generate_image"]
   }
 }
