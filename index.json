@@ -1,7 +1,7 @@
 {
   "version": 1,
   "name": "HydroSkills Registry",
-  "updatedAt": "2026-03-07T00:00:00Z",
+  "updatedAt": "2026-03-08T00:00:00Z",
   "skills": [
     {
       "id": "my-code-review",
@@ -164,6 +164,15 @@
       "version": "1.0.0",
       "tags": ["mcp", "knowledge-base", "rag"],
       "files": ["xiaofangmcp.mcp.json"]
+    },
+    {
+      "id": "mcp-banana",
+      "name": "Banana 文生图",
+      "description": "基于 @ynzys/mcp-banana 的 AI 图片生成。需设置 GEMINI_API_KEY 和 IMAGE_OUTPUT_DIR",
+      "version": "1.0.1",
+      "author": "ynzys",
+      "tags": ["mcp", "image", "gemini", "text-to-image"],
+      "files": ["mcp-banana.mcp.json"]
     }
   ]
 }
