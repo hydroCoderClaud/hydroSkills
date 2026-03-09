@@ -169,7 +169,7 @@
       "id": "mcp-hydrocoder-image",
       "name": "HydroCoder 文生图",
       "description": "基于 mcp-hydrocoder-image 的 AI 图片生成，支持文生图、图片编辑、多图合成。需设置 GEMINI_API_KEY 和 IMAGE_OUTPUT_DIR",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": "ynzys",
       "tags": ["mcp", "image", "gemini", "text-to-image", "image-editing", "multi-image"],
       "files": ["mcp-hydrocoder-image.mcp.json"]
