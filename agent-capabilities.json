@@ -81,12 +81,12 @@
       }
     },
     {
-      "id": "mcp-banana",
-      "name": "Banana 文生图",
-      "description": "使用 @ynzys/mcp-banana 通过 Gemini API 生成图片",
+      "id": "mcp-hydrocoder-image",
+      "name": "HydroCoder 文生图",
+      "description": "通过 Gemini API 生成图片，支持文生图、图片编辑、多图合成与融合",
       "icon": "image",
       "type": "mcp",
-      "componentId": "mcp-banana",
+      "componentId": "mcp-hydrocoder-image",
       "category": "creative",
       "categoryName": {
         "zh-CN": "创意工具",
