@@ -1,7 +1,7 @@
 {
   "version": 1,
   "name": "HydroSkills Registry",
-  "updatedAt": "2026-03-09T00:00:00Z",
+  "updatedAt": "2026-03-11T00:00:00Z",
   "skills": [
     {
       "id": "my-code-review",
@@ -173,6 +173,15 @@
       "author": "ynzys",
       "tags": ["mcp", "image", "gemini", "text-to-image", "image-editing", "multi-image"],
       "files": ["mcp-hydrocoder-image.mcp.json"]
+    },
+    {
+      "id": "google-gemini",
+      "name": "Google Gemini",
+      "description": "Google Gemini AI 模型服务，支持文本生成、Token 计数、内容嵌入。需设置 GOOGLE_API_KEY，可选配置 HTTPS_PROXY 代理",
+      "version": "1.0.0",
+      "author": "Google",
+      "tags": ["mcp", "gemini", "ai", "llm", "embedding"],
+      "files": ["google-gemini.mcp.json"]
     }
   ]
 }
