@@ -96,7 +96,7 @@
     {
       "id": "google-gemini",
       "name": "Google Gemini",
-      "description": "Google Gemini AI 模型服务，支持文本生成、Token 计数、内容嵌入",
+      "description": "Google Gemini AI 模型服务，支持文本生成、图像生成、Token 计数、内容嵌入",
       "icon": "cpu",
       "type": "mcp",
       "componentId": "google-gemini",

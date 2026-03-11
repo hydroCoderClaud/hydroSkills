@@ -1,13 +1,14 @@
 {
   "google-gemini": {
     "command": "npx",
-    "args": ["-y", "@google/generative-ai-mcp"],
+    "args": ["-y", "@mintmcqueen/gemini-mcp"],
     "env": {
       "GOOGLE_API_KEY": "your-google-api-key-here",
       "HTTPS_PROXY": "http://127.0.0.1:7890"
     },
     "tools": [
       "generate_content",
+      "generate_image",
       "count_tokens",
       "embed_content",
       "batch_embed_contents"
