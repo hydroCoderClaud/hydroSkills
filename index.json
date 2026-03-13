@@ -175,6 +175,15 @@
       "files": ["mcp-hydrocoder-image.mcp.json"]
     },
     {
+      "id": "mcp-hydrocoder-ssh",
+      "name": "HydroCoder SSH",
+      "description": "SSH MCP 服务，允许 Claude Code 连接远程服务器执行命令。支持 SSH agent、密钥文件、密码认证，含连接池管理",
+      "version": "0.1.0",
+      "author": "ynzys",
+      "tags": ["mcp", "ssh", "remote", "deployment"],
+      "files": ["mcp-hydrocoder-ssh.mcp.json"]
+    },
+    {
       "id": "google-gemini",
       "name": "Google Gemini",
       "description": "Google Gemini AI 模型服务，支持文本生成、图像生成、Token 计数、内容嵌入、批处理 API。需设置 GOOGLE_API_KEY，可选配置 HTTPS_PROXY 代理",
