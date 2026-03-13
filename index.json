@@ -178,7 +178,7 @@
       "id": "mcp-hydrocoder-ssh",
       "name": "HydroCoder SSH",
       "description": "SSH MCP 服务，允许 Claude Code 连接远程服务器执行命令。支持 SSH agent、密钥文件、密码认证，含连接池管理",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "author": "ynzys",
       "tags": ["mcp", "ssh", "remote", "deployment"],
       "files": ["mcp-hydrocoder-ssh.mcp.json"]
