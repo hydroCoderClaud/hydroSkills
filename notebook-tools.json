@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.0",
   "tools": [
     {
@@ -10,8 +10,8 @@
       "bgColor": "#FCE4EC",
       "color": "#C2185B",
       "installDependencies": [
-        { 
-          "type": "plugin", 
+        {
+          "type": "plugin",
           "id": "document-skills@anthropic-agent-skills",
           "marketplaceSource": "anthropics/skills"
         }
