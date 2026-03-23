@@ -1,0 +1,25 @@
+﻿{
+  "version": "1.0",
+  "tools": [
+    {
+      "id": "pdf-report-pro",
+      "name": "PDF 报告生成",
+      "description": "基于左侧来源自动生成排版精美的 PDF 报告",
+      "icon": "file",
+      "outputType": "pdf",
+      "bgColor": "#FCE4EC",
+      "color": "#C2185B",
+      "installDependencies": [
+        { 
+          "type": "plugin", 
+          "id": "document-skills@anthropic-agent-skills",
+          "marketplaceSource": "anthropics/skills"
+        }
+      ],
+      "promptTemplateId": "sys-notebook-pdf-summary",
+      "runtimePlaceholders": {
+        "PDF_CMD": "/document-skills:pdf"
+      }
+    }
+  ]
+}
