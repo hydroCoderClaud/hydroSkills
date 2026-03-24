@@ -1,7 +1,7 @@
 {
   "version": 1,
   "name": "HydroSkills Registry",
-  "updatedAt": "2026-03-12T00:00:00Z",
+  "updatedAt": "2026-03-24T00:00:00Z",
   "skills": [
     {
       "id": "my-code-review",
@@ -110,6 +110,14 @@
       "version": "1.0.0",
       "author": "HydroCoder",
       "tags": ["sql", "database", "performance"]
+    },
+    {
+      "id": "sys-notebook-notes",
+      "name": "笔记总结模板",
+      "description": "提取核心要点生成结构化笔记（Notebook 内置）",
+      "version": "1.0.0",
+      "author": "HydroCoder",
+      "tags": ["notebook", "notes", "summary"]
     }
   ],
   "agents": [

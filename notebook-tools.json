@@ -2,6 +2,19 @@
   "version": "1.0",
   "tools": [
     {
+      "id": "notes",
+      "name": "笔记总结",
+      "version": "1.0.0",
+      "description": "提取核心要点生成结构化笔记",
+      "icon": "fileText",
+      "outputType": "markdown",
+      "bgColor": "#FFF8E1",
+      "color": "#FFA000",
+      "installDependencies": [],
+      "promptTemplateId": "sys-notebook-notes",
+      "runtimePlaceholders": {}
+    },
+    {
       "id": "pdf-report-pro",
       "name": "PDF 报告生成",
       "version": "1.0.1",
