@@ -35,6 +35,27 @@
       "runtimePlaceholders": {
         "PDF_CMD": "/document-skills:pdf"
       }
+    },
+    {
+      "id": "generate-image",
+      "name": "生成图片",
+      "version": "1.0.1",
+      "description": "基于左侧来源材料生成图片，并整理为 PNG 成果",
+      "icon": "image",
+      "outputType": "image",
+      "bgColor": "#E3F2FD",
+      "color": "#1976D2",
+      "beta": true,
+      "installDependencies": [
+        {
+          "type": "mcp",
+          "id": "mcp-hydrocoder-image"
+        }
+      ],
+      "promptTemplateId": "sys-notebook-generate-image",
+      "runtimePlaceholders": {
+        "IMAGE_TOOL": "mcp__mcp-hydrocoder-image__generate_image"
+      }
     }
   ]
 }

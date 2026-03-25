@@ -59,7 +59,7 @@ skills/{skill-id}/SKILL.md
 prompts/{prompt-id}.md
 ```
 
-纯 Markdown，**不需要** YAML frontmatter。全部内容即为提示词模板。文件不能为空。`name` 由 index.json 定义。
+普通 Prompt 使用纯 Markdown，默认**不需要** YAML frontmatter。Notebook 系统模板允许带简短 frontmatter（如 `name`、`description`），以便在市场与编辑器中展示更清晰的名称和用途。文件不能为空。
 
 ### Agents — 单文件 + YAML frontmatter
 
@@ -217,6 +217,143 @@ mcps/
 ```
 
 文件名与 `id` 保持一致（`{id}.mcp.json`），除非有多文件需求时通过 `files` 字段显式声明。
+
+## Notebook 市场工具规范
+
+`notebook-tools.json` 是 cc-desktop Notebook 创作工具市场的独立清单，职责不同于 `index.json`：
+- `notebook-tools.json` 定义 Notebook 工具卡片本身（工具 ID、图标、输出类型、依赖、Prompt 模板、运行时占位符）
+- `index.json` 仍负责 Notebook 工具依赖的 Prompt / MCP / Skill / Plugin 的市场注册与版本更新
+
+### Notebook 工具清单位置
+
+```text
+notebook-tools.json
+```
+
+顶层结构：
+
+```json
+{
+  "version": "1.0",
+  "tools": []
+}
+```
+
+### Notebook 工具字段规范
+
+每个工具条目至少应包含以下字段：
+- `id` — 工具唯一标识，使用稳定的 kebab-case，推荐 `[a-z0-9-]`
+- `name` — 工具显示名称
+- `version` — 工具版本号，修改工具定义后需递增
+- `description` — 工具描述
+- `icon` — cc-desktop `Icon` 组件支持的图标名
+- `outputType` — 输出类型，必须使用 cc-desktop 已支持的类型
+- `bgColor` / `color` — 工具卡片配色
+- `installDependencies` — 底层依赖数组（如 `mcp` / `plugin` / `skill` / `agent`）
+- `promptTemplateId` — 配套 Prompt 的市场 ID
+- `runtimePlaceholders` — Prompt 模板中运行时占位符的替换映射
+
+可选字段：
+- `beta` — 标记为 Beta 工具
+
+### outputType 规则
+
+当前 Notebook 已支持的输出类型包括：`markdown`、`pdf`、`document`、`image`、`video`、`code`、`text`、`csv`。
+
+其中图片类工具统一使用：
+
+```json
+{
+  "outputType": "image"
+}
+```
+
+cc-desktop 会将 `image` 类型的成果文件扩展名映射为 `.png`。
+
+### 依赖安装规则
+
+- `installDependencies` 只声明底层依赖，不要把业务说明写进依赖对象
+- 每项依赖至少包含：`type`、`id`
+- `marketplaceSource` 仅在依赖 `plugin` 且需要自动注册第三方市场时填写
+- `promptTemplateId` 对应的 Prompt 由 cc-desktop 安装流程自动安装
+- 除非有特殊原因，不要把同一个 Prompt 同时写进 `installDependencies`
+
+示例：
+
+```json
+{
+  "installDependencies": [
+    {
+      "type": "mcp",
+      "id": "mcp-hydrocoder-image"
+    }
+  ]
+}
+```
+
+### Prompt 模板规则
+
+Notebook 工具专用 Prompt 放在：
+
+```text
+prompts/{promptTemplateId}.md
+```
+
+要求：
+- 文件名与 `promptTemplateId` 保持一致
+- 需要进入市场安装链路的 Prompt，必须同步登记到 `index.json` 的 `prompts` 数组
+- Notebook Prompt 推荐使用简短 frontmatter（`name`、`description`）
+- 模板正文必须兼容以下占位符：
+  - `{{sources}}`
+  - `{{expected_path}}`
+  - `{{notebook_path}}`
+- 额外命令或工具名统一通过 `runtimePlaceholders` 注入，推荐使用大写占位符，例如 `{{IMAGE_TOOL}}`
+- Prompt 必须明确要求将最终产物保存到 `{{expected_path}}`
+- 若底层工具默认写入临时目录或自身输出目录，Prompt 应明确要求在生成完成后将最终产物整理、移动或重命名到 `{{expected_path}}`
+
+### 运行时占位符规则
+
+如果 Notebook 工具需要调用特定命令或 MCP 工具，请在 `runtimePlaceholders` 中声明，再在 Prompt 模板中引用。
+
+图片生成工具推荐写法：
+
+```json
+{
+  "runtimePlaceholders": {
+    "IMAGE_TOOL": "mcp__mcp-hydrocoder-image__generate_image"
+  }
+}
+```
+
+### 图片类 Notebook 工具专项规范
+
+新增图片类 Notebook 工具时：
+- 优先复用现有 `mcp-hydrocoder-image`
+- 工具条目建议显式标记 `"beta": true`
+- `installDependencies` 推荐声明：
+
+```json
+[
+  {
+    "type": "mcp",
+    "id": "mcp-hydrocoder-image"
+  }
+]
+```
+
+- Prompt 模板应明确：
+  - 基于来源材料生成图片
+  - 直接调用图片生成工具
+  - 若底层工具不能直接写入目标绝对路径，需在生成后将结果整理、移动或重命名到 `{{expected_path}}`
+
+### 版本同步规则
+
+新增或修改 Notebook 市场工具时，需同步检查：
+1. `notebook-tools.json` 中工具条目是否已新增/更新
+2. 对应 `promptTemplateId` 的 Prompt 文件是否存在
+3. `index.json` 是否已登记对应 Prompt 元数据
+4. 若依赖 MCP / Skill / Agent / Plugin，相关组件是否已在市场中可安装
+5. 修改 `index.json` 后更新顶层 `updatedAt`
 
 ## agent-capabilities.json 能力清单规范
 

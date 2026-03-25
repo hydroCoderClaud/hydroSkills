@@ -1,7 +1,7 @@
 {
   "version": 1,
   "name": "HydroSkills Registry",
-  "updatedAt": "2026-03-24T00:00:00Z",
+  "updatedAt": "2026-03-25T00:00:00Z",
   "skills": [
     {
       "id": "my-code-review",
@@ -118,6 +118,14 @@
       "version": "1.0.0",
       "author": "HydroCoder",
       "tags": ["notebook", "notes", "summary"]
+    },
+    {
+      "id": "sys-notebook-generate-image",
+      "name": "Notebook 生成图片模板",
+      "description": "根据 Notebook 来源材料生成图片并将结果整理到目标路径",
+      "version": "1.0.0",
+      "author": "HydroCoder",
+      "tags": ["notebook", "image", "generation"]
     }
   ],
   "agents": [
