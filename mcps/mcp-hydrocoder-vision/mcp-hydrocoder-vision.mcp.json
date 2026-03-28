@@ -1,0 +1,15 @@
+{
+  "mcp-hydrocoder-vision": {
+    "command": "npx",
+    "args": ["-y", "mcp-hydrocoder-vision"],
+    "env": {
+      "LM_STUDIO_URL": "http://localhost:1234/v1/chat/completions",
+      "VISION_MODEL": "Qwen3-VL-4B-Instruct"
+    },
+    "tools": [
+      "analyzeImage",
+      "extractText",
+      "describeForCode"
+    ]
+  }
+}

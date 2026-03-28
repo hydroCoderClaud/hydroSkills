@@ -105,6 +105,19 @@
         "zh-CN": "AI 模型",
         "en-US": "AI Models"
       }
+    },
+    {
+      "id": "mcp-hydrocoder-vision",
+      "name": "HydroCoder Vision",
+      "description": "本地视觉语言 MCP 服务，支持图像分析、OCR、UI 转代码，基于 Qwen3 VL 4B",
+      "icon": "image",
+      "type": "mcp",
+      "componentId": "mcp-hydrocoder-vision",
+      "category": "ai",
+      "categoryName": {
+        "zh-CN": "AI 模型",
+        "en-US": "AI Models"
+      }
     }
   ]
 }
