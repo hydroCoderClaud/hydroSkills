@@ -39,7 +39,7 @@
     {
       "id": "generate-image",
       "name": "生成图片",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "description": "基于左侧来源材料生成图片，并整理为 PNG 成果",
       "icon": "image",
       "outputType": "image",
