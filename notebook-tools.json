@@ -40,7 +40,7 @@
       "id": "generate-image",
       "name": "生成图片",
       "version": "1.0.2",
-      "description": "基于左侧来源材料生成图片，并整理为 PNG 成果",
+      "description": "基于左侧来源材料生成 JPG 图片",
       "icon": "image",
       "outputType": "image",
       "bgColor": "#E3F2FD",
