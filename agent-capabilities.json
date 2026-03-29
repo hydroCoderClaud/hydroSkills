@@ -16,19 +16,6 @@
       }
     },
     {
-      "id": "filesystem",
-      "name": "文件系统",
-      "description": "通过 MCP 协议访问本地文件系统，支持读写文件、列目录等操作",
-      "icon": "folder",
-      "type": "mcp",
-      "componentId": "filesystem",
-      "category": "tools",
-      "categoryName": {
-        "zh-CN": "工具",
-        "en-US": "Tools"
-      }
-    },
-    {
       "id": "remotion-video",
       "name": "视频创作",
       "description": "使用 Remotion 框架从零开始制作视频，含自动安装与渲染",
@@ -42,45 +29,6 @@
       }
     },
     {
-      "id": "remotion-best-practices",
-      "name": "Remotion 最佳实践",
-      "description": "Remotion 官方最佳实践知识库，涵盖动画、字幕、音频、3D 等 30+ 领域规则",
-      "icon": "code",
-      "type": "skill",
-      "componentId": "remotion-best-practices",
-      "category": "creative",
-      "categoryName": {
-        "zh-CN": "创意工具",
-        "en-US": "Creative Tools"
-      }
-    },
-    {
-      "id": "mcp-image",
-      "name": "图像生成",
-      "description": "通过 Gemini API 生成图像，支持自定义输出目录",
-      "icon": "image",
-      "type": "mcp",
-      "componentId": "mcp-image",
-      "category": "creative",
-      "categoryName": {
-        "zh-CN": "创意工具",
-        "en-US": "Creative Tools"
-      }
-    },
-    {
-      "id": "xiaofangmcp",
-      "name": "消防考试知识库",
-      "description": "消防员考试知识库 MCP 服务，支持查询知识库列表和 RAG 对话",
-      "icon": "search",
-      "type": "mcp",
-      "componentId": "xiaofangmcp",
-      "category": "tools",
-      "categoryName": {
-        "zh-CN": "工具",
-        "en-US": "Tools"
-      }
-    },
-    {
       "id": "mcp-hydrocoder-image",
       "name": "HydroCoder 文生图",
       "description": "通过 Gemini API 生成图片，支持文生图、图片编辑、多图合成与融合",
@@ -91,19 +39,6 @@
       "categoryName": {
         "zh-CN": "创意工具",
         "en-US": "Creative Tools"
-      }
-    },
-    {
-      "id": "google-gemini",
-      "name": "Google Gemini",
-      "description": "Google Gemini AI 模型服务，支持文本生成、图像生成、Token 计数、内容嵌入",
-      "icon": "cpu",
-      "type": "mcp",
-      "componentId": "google-gemini",
-      "category": "ai",
-      "categoryName": {
-        "zh-CN": "AI 模型",
-        "en-US": "AI Models"
       }
     },
     {

@@ -1,28 +1,8 @@
 {
   "version": 1,
   "name": "HydroSkills Registry",
-  "updatedAt": "2026-03-28T15:30:00Z",
+  "updatedAt": "2026-03-29T00:00:00Z",
   "skills": [
-    {
-      "id": "my-code-review",
-      "name": "my-code-review",
-      "description": "代码审查技能，分析代码质量并给出改进建议",
-      "version": "1.0.0",
-      "author": "HydroCoder",
-      "tags": ["code", "review", "quality"],
-      "files": ["SKILL.md"],
-      "updatedAt": "2026-02-10T00:00:00Z"
-    },
-    {
-      "id": "my-git-commit-helper",
-      "name": "my-git-commit-helper",
-      "description": "Git 提交助手，帮助生成规范的 Conventional Commits 提交信息",
-      "version": "1.0.0",
-      "author": "HydroCoder",
-      "tags": ["git", "commit", "workflow"],
-      "files": ["SKILL.md"],
-      "updatedAt": "2026-02-10T00:00:00Z"
-    },
     {
       "id": "remotion-video",
       "name": "Remotion 视频创作",
@@ -32,58 +12,6 @@
       "tags": ["video", "remotion", "react", "creative"],
       "files": ["SKILL.md"],
       "updatedAt": "2026-02-14T00:00:00Z"
-    },
-    {
-      "id": "remotion-best-practices",
-      "name": "Remotion Best Practices",
-      "description": "Remotion 官方最佳实践知识库，涵盖动画、字幕、音频、3D、图表等 30+ 领域规则，按需加载",
-      "version": "1.0.0",
-      "author": "remotion-dev",
-      "tags": ["remotion", "video", "react", "animation", "best-practices"],
-      "files": [
-        "SKILL.md",
-        "rules/3d.md",
-        "rules/animations.md",
-        "rules/assets.md",
-        "rules/assets/charts-bar-chart.tsx",
-        "rules/assets/text-animations-typewriter.tsx",
-        "rules/assets/text-animations-word-highlight.tsx",
-        "rules/audio-visualization.md",
-        "rules/audio.md",
-        "rules/calculate-metadata.md",
-        "rules/can-decode.md",
-        "rules/charts.md",
-        "rules/compositions.md",
-        "rules/display-captions.md",
-        "rules/extract-frames.md",
-        "rules/ffmpeg.md",
-        "rules/fonts.md",
-        "rules/get-audio-duration.md",
-        "rules/get-video-dimensions.md",
-        "rules/get-video-duration.md",
-        "rules/gifs.md",
-        "rules/images.md",
-        "rules/import-srt-captions.md",
-        "rules/light-leaks.md",
-        "rules/lottie.md",
-        "rules/maps.md",
-        "rules/measuring-dom-nodes.md",
-        "rules/measuring-text.md",
-        "rules/parameters.md",
-        "rules/sequencing.md",
-        "rules/sfx.md",
-        "rules/subtitles.md",
-        "rules/tailwind.md",
-        "rules/text-animations.md",
-        "rules/timing.md",
-        "rules/transcribe-captions.md",
-        "rules/transitions.md",
-        "rules/transparent-videos.md",
-        "rules/trimming.md",
-        "rules/videos.md",
-        "rules/voiceover.md"
-      ],
-      "updatedAt": "2026-03-03T00:00:00Z"
     }
   ],
   "prompts": [
@@ -104,14 +32,6 @@
       "tags": ["api", "docs", "generator"]
     },
     {
-      "id": "sql-optimizer",
-      "name": "SQL 优化顾问",
-      "description": "分析 SQL 查询并给出索引建议、查询重写和性能优化方案",
-      "version": "1.0.0",
-      "author": "HydroCoder",
-      "tags": ["sql", "database", "performance"]
-    },
-    {
       "id": "sys-notebook-notes",
       "name": "笔记总结模板",
       "description": "提取核心要点生成结构化笔记（Notebook 内置）",
@@ -124,55 +44,13 @@
     {
       "id": "refactor-advisor",
       "name": "重构顾问",
-      "description": "代码重构顾问，分析代码坏味道并提供重构方案",
+      "description": "代码重构顾问，分析代码质量并给出改进建议",
       "version": "1.0.0",
       "author": "HydroCoder",
       "tags": ["refactor", "code-quality"]
-    },
-    {
-      "id": "test-writer",
-      "name": "测试编写专家",
-      "description": "根据代码自动生成全面的单元测试",
-      "version": "1.0.0",
-      "author": "HydroCoder",
-      "tags": ["test", "unit-test", "automation"]
-    },
-    {
-      "id": "changelog-writer",
-      "name": "变更日志生成器",
-      "description": "基于 git log 自动生成结构化 CHANGELOG",
-      "version": "1.0.0",
-      "author": "HydroCoder",
-      "tags": ["changelog", "docs", "release"]
     }
   ],
   "mcps": [
-    {
-      "id": "filesystem",
-      "name": "Filesystem MCP",
-      "description": "文件系统 MCP 服务，允许 Claude Code 安全地访问指定目录的文件",
-      "version": "1.0.0",
-      "author": "Anthropic",
-      "tags": ["mcp", "filesystem", "files"],
-      "files": ["filesystem.mcp.json"]
-    },
-    {
-      "id": "mcp-image",
-      "name": "Gemini 文生图",
-      "description": "基于 Google Gemini (Nano Banana 2) 的 AI 图片生成，支持自动 prompt 优化和质量预设。需设置 GEMINI_API_KEY 和 IMAGE_OUTPUT_DIR",
-      "version": "1.0.0",
-      "author": "shinpr",
-      "tags": ["mcp", "image", "gemini", "text-to-image"],
-      "files": ["mcp-image.mcp.json"]
-    },
-    {
-      "id": "xiaofangmcp",
-      "name": "消防考试知识库",
-      "description": "消防员考试知识库 MCP 服务，支持查询知识库列表和 RAG 对话",
-      "version": "1.0.0",
-      "tags": ["mcp", "knowledge-base", "rag"],
-      "files": ["xiaofangmcp.mcp.json"]
-    },
     {
       "id": "mcp-hydrocoder-image",
       "name": "HydroCoder 文生图",
@@ -190,15 +68,6 @@
       "author": "ynzys",
       "tags": ["mcp", "ssh", "remote", "deployment"],
       "files": ["mcp-hydrocoder-ssh.mcp.json"]
-    },
-    {
-      "id": "google-gemini",
-      "name": "Google Gemini",
-      "description": "Google Gemini AI 模型服务，支持文本生成、图像生成、Token 计数、内容嵌入、批处理 API。需设置 GOOGLE_API_KEY，可选配置 HTTPS_PROXY 代理",
-      "version": "1.0.1",
-      "author": "mintmcqueen",
-      "tags": ["mcp", "gemini", "ai", "llm", "embedding", "image-generation"],
-      "files": ["google-gemini.mcp.json"]
     },
     {
       "id": "mcp-hydrocoder-vision",
