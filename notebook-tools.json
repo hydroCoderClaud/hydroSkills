@@ -10,6 +10,7 @@
       "outputType": "markdown",
       "bgColor": "#FFF8E1",
       "color": "#FFA000",
+      "tags": ["笔记", "总结", "markdown"],
       "installDependencies": [],
       "promptTemplateId": "sys-notebook-notes",
       "runtimePlaceholders": {}
@@ -23,6 +24,7 @@
       "outputType": "pdf",
       "bgColor": "#FCE4EC",
       "color": "#C2185B",
+      "tags": ["报告", "pdf", "PDF", "文档"],
       "beta": true,
       "installDependencies": [
         {
@@ -45,6 +47,7 @@
       "outputType": "image",
       "bgColor": "#E3F2FD",
       "color": "#1976D2",
+      "tags": ["图片", "生成", "image"],
       "beta": true,
       "installDependencies": [
         {
