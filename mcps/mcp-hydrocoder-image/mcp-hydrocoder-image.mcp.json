@@ -6,6 +6,7 @@
       "GEMINI_API_KEY": "your-gemini-api-key-here",
       "IMAGE_OUTPUT_DIR": "./hydroimage_output",
       "GEMINI_API_BASE_URL": "",
+      "API_TIMEOUT": "120000",
       "HTTPS_PROXY": "http://127.0.0.1:15236",
       "HTTP_PROXY": "http://127.0.0.1:15236"
     },

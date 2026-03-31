@@ -254,6 +254,7 @@ notebook-tools.json
 - `runtimePlaceholders` — Prompt 模板中运行时占位符的替换映射
 
 可选字段：
+- `tags` — 标签数组，用于 cc-desktop 市场搜索与多选标签筛选，推荐使用稳定的英文 kebab-case 或小写单词
 - `beta` — 标记为 Beta 工具
 
 ### outputType 规则
