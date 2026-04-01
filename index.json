@@ -1,7 +1,7 @@
 {
   "version": 1,
   "name": "HydroSkills Registry",
-  "updatedAt": "2026-03-31T00:00:00Z",
+  "updatedAt": "2026-04-01T00:00:00Z",
   "skills": [
     {
       "id": "remotion-video",
@@ -38,6 +38,14 @@
       "version": "1.0.0",
       "author": "HydroCoder",
       "tags": ["notebook", "notes", "summary"]
+    },
+    {
+      "id": "sys-notebook-remotion-video",
+      "name": "Notebook 视频制作模板",
+      "description": "基于来源材料生成 MP4 视频并归档到目标路径",
+      "version": "1.0.0",
+      "author": "HydroCoder",
+      "tags": ["notebook", "video", "remotion"]
     }
   ],
   "agents": [

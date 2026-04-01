@@ -347,6 +347,28 @@ prompts/{promptTemplateId}.md
   - 直接调用图片生成工具
   - 若底层工具不能直接写入目标绝对路径，需在生成后将结果整理、移动或重命名到 `{{expected_path}}`
 
+### 视频类 Notebook 工具专项规范
+
+新增视频类 Notebook 工具时：
+- 优先复用现有 `remotion-video` skill
+- 工具条目建议显式标记 `"beta": true`
+- `installDependencies` 推荐声明：
+
+```json
+[
+  {
+    "type": "skill",
+    "id": "remotion-video"
+  }
+]
+```
+
+- Prompt 模板应明确：
+  - 基于来源材料生成视频
+  - 直接调用视频制作 skill
+  - 若底层工具不能直接写入目标绝对路径，需在生成后将结果整理、移动或重命名到 `{{expected_path}}`
+  - 最终输出文件扩展名应与工具的 `outputType` 保持一致（推荐 `mp4`）
+
 ### 版本同步规则
 
 新增或修改 Notebook 市场工具时，需同步检查：
@@ -355,6 +377,7 @@ prompts/{promptTemplateId}.md
 3. `index.json` 是否已登记对应 Prompt 元数据
 4. 若依赖 MCP / Skill / Agent / Plugin，相关组件是否已在市场中可安装
 5. 修改 `index.json` 后更新顶层 `updatedAt`
+6. 视频类工具复用 remotion-video 时，`promptTemplateId` 推荐 `sys-notebook-remotion-video`，并在 `prompts/sys-notebook-remotion-video.md` 维护模板
 
 ## agent-capabilities.json 能力清单规范
 

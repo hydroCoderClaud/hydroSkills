@@ -85,6 +85,28 @@
       }
     },
     {
+      "id": "video-remotion-pro",
+      "name": "视频制作",
+      "version": "1.0.0",
+      "description": "基于左侧来源材料使用 Remotion 自动生成 MP4 视频",
+      "icon": "video",
+      "outputType": "mp4",
+      "bgColor": "#FFF3E0",
+      "color": "#EF6C00",
+      "tags": ["视频", "video", "remotion", "创作"],
+      "beta": true,
+      "installDependencies": [
+        {
+          "type": "skill",
+          "id": "remotion-video"
+        }
+      ],
+      "promptTemplateId": "sys-notebook-remotion-video",
+      "runtimePlaceholders": {
+        "VIDEO_SKILL": "/remotion-video"
+      }
+    },
+    {
       "id": "generate-image",
       "name": "生成图片",
       "version": "1.0.3",
