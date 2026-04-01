@@ -247,7 +247,7 @@ notebook-tools.json
 - `version` — 工具版本号，修改工具定义后需递增
 - `description` — 工具描述
 - `icon` — cc-desktop `Icon` 组件支持的图标名
-- `outputType` — 输出类型，必须使用 cc-desktop 已支持的类型
+- `outputType` — 目标文件扩展名，使用不带点的扩展名字符串
 - `bgColor` / `color` — 工具卡片配色
 - `installDependencies` — 底层依赖数组（如 `mcp` / `plugin` / `skill` / `agent`）
 - `promptTemplateId` — 配套 Prompt 的市场 ID
@@ -259,17 +259,17 @@ notebook-tools.json
 
 ### outputType 规则
 
-当前 Notebook 已支持的输出类型包括：`markdown`、`pdf`、`document`、`image`、`video`、`code`、`text`、`csv`。
+当前 Notebook 工具的 `outputType` 语义为“目标文件扩展名”，应直接填写不带 `.` 的扩展名，例如：`md`、`pdf`、`docx`、`pptx`、`jpg`。
 
 其中图片类工具统一使用：
 
 ```json
 {
-  "outputType": "image"
+  "outputType": "jpg"
 }
 ```
 
-cc-desktop 会将 `image` 类型的成果文件扩展名映射为 `.png`。
+cc-desktop 会直接使用该扩展名生成 `{{expected_path}}` 与成果记录。
 
 ### 依赖安装规则
 
