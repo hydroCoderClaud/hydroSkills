@@ -39,6 +39,52 @@
       }
     },
     {
+      "id": "ppt-report-pro",
+      "name": "PPT 演示稿生成",
+      "version": "1.0.0",
+      "description": "基于左侧来源自动生成结构清晰的 PPT 演示稿",
+      "icon": "presentation",
+      "outputType": "pptx",
+      "bgColor": "#E8F5E9",
+      "color": "#2E7D32",
+      "tags": ["演示", "PPT", "pptx", "文档"],
+      "beta": true,
+      "installDependencies": [
+        {
+          "type": "plugin",
+          "id": "document-skills@anthropic-agent-skills",
+          "marketplaceSource": "anthropics/skills"
+        }
+      ],
+      "promptTemplateId": "sys-notebook-ppt-summary",
+      "runtimePlaceholders": {
+        "PPT_CMD": "/document-skills:pptx"
+      }
+    },
+    {
+      "id": "docx-report-pro",
+      "name": "DOCX 文档生成",
+      "version": "1.0.0",
+      "description": "基于左侧来源自动生成结构化 DOCX 文档",
+      "icon": "fileText",
+      "outputType": "docx",
+      "bgColor": "#EDE7F6",
+      "color": "#5E35B1",
+      "tags": ["文档", "DOCX", "docx", "报告"],
+      "beta": true,
+      "installDependencies": [
+        {
+          "type": "plugin",
+          "id": "document-skills@anthropic-agent-skills",
+          "marketplaceSource": "anthropics/skills"
+        }
+      ],
+      "promptTemplateId": "sys-notebook-docx-summary",
+      "runtimePlaceholders": {
+        "DOCX_CMD": "/document-skills:docx"
+      }
+    },
+    {
       "id": "generate-image",
       "name": "生成图片",
       "version": "1.0.2",
