@@ -254,7 +254,7 @@ notebook-tools.json
 - `runtimePlaceholders` — Prompt 模板中运行时占位符的替换映射
 
 可选字段：
-- `tags` — 标签数组，用于 cc-desktop 市场搜索与多选标签筛选，推荐使用稳定的英文 kebab-case 或小写单词
+- `tags` — 标签数组，用于 cc-desktop 市场搜索与多选标签筛选，推荐使用简洁、稳定的中英混合标签；避免同时出现 `pdf/PDF`、`ppt/PPTX`、`docx/DOCX`、`xlsx/Excel` 这类重复格式标签
 - `beta` — 标记为 Beta 工具
 
 ### outputType 规则
@@ -302,7 +302,7 @@ prompts/{promptTemplateId}.md
 
 要求：
 - 文件名与 `promptTemplateId` 保持一致
-- 需要进入市场安装链路的 Prompt，必须同步登记到 `index.json` 的 `prompts` 数组
+- Notebook 工具专用 Prompt **不需要**加入 `index.json` 的 `prompts` 索引；`notebook-tools.json` 会直接通过 `promptTemplateId` 引用对应模板
 - Notebook Prompt 推荐使用简短 frontmatter（`name`、`description`）
 - 模板正文必须兼容以下占位符：
   - `{{sources}}`
@@ -374,9 +374,8 @@ prompts/{promptTemplateId}.md
 新增或修改 Notebook 市场工具时，需同步检查：
 1. `notebook-tools.json` 中工具条目是否已新增/更新
 2. 对应 `promptTemplateId` 的 Prompt 文件是否存在
-3. `index.json` 是否已登记对应 Prompt 元数据
-4. 若依赖 MCP / Skill / Agent / Plugin，相关组件是否已在市场中可安装
-5. 修改 `index.json` 后更新顶层 `updatedAt`
+3. 若依赖 MCP / Skill / Agent / Plugin，相关组件是否已在市场中可安装
+4. 修改 `index.json` 后更新顶层 `updatedAt`（仅当你确实修改了 `index.json` 中的 skill / mcp / agent / plugin 注册信息时）
 6. 视频类工具复用 remotion-video 时，`promptTemplateId` 推荐 `sys-notebook-remotion-video`，并在 `prompts/sys-notebook-remotion-video.md` 维护模板
 
 ## agent-capabilities.json 能力清单规范
