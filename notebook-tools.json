@@ -115,7 +115,7 @@
       "outputType": "jpg",
       "bgColor": "#E3F2FD",
       "color": "#1976D2",
-      "tags": ["图片", "生成"],
+      "tags": ["图片"],
       "beta": true,
       "installDependencies": [
         {
