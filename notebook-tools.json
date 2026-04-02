@@ -10,7 +10,7 @@
       "outputType": "md",
       "bgColor": "#FFF8E1",
       "color": "#FFA000",
-      "tags": ["笔记", "总结", "markdown"],
+      "tags": ["笔记", "总结"],
       "installDependencies": [],
       "promptTemplateId": "sys-notebook-notes",
       "runtimePlaceholders": {}
@@ -24,7 +24,7 @@
       "outputType": "pdf",
       "bgColor": "#FCE4EC",
       "color": "#C2185B",
-      "tags": ["报告", "pdf", "PDF", "文档"],
+      "tags": ["报告", "PDF"],
       "beta": true,
       "installDependencies": [
         {
@@ -47,7 +47,7 @@
       "outputType": "pptx",
       "bgColor": "#E8F5E9",
       "color": "#2E7D32",
-      "tags": ["演示", "PPT", "pptx", "文档"],
+      "tags": ["演示", "PPT"],
       "beta": true,
       "installDependencies": [
         {
@@ -70,7 +70,7 @@
       "outputType": "docx",
       "bgColor": "#EDE7F6",
       "color": "#5E35B1",
-      "tags": ["文档", "DOCX", "docx", "报告"],
+      "tags": ["文档", "Word"],
       "beta": true,
       "installDependencies": [
         {
@@ -93,7 +93,7 @@
       "outputType": "mp4",
       "bgColor": "#FFF3E0",
       "color": "#EF6C00",
-      "tags": ["视频", "video", "remotion", "创作"],
+      "tags": ["视频", "Remotion"],
       "beta": true,
       "installDependencies": [
         {
@@ -115,7 +115,7 @@
       "outputType": "jpg",
       "bgColor": "#E3F2FD",
       "color": "#1976D2",
-      "tags": ["图片", "生成", "image"],
+      "tags": ["图片", "生成"],
       "beta": true,
       "installDependencies": [
         {
@@ -126,6 +126,29 @@
       "promptTemplateId": "sys-notebook-generate-image",
       "runtimePlaceholders": {
         "IMAGE_TOOL": "mcp__mcp-hydrocoder-image__generate_image"
+      }
+    },
+    {
+      "id": "xlsx-report-pro",
+      "name": "Excel 表格生成",
+      "version": "1.0.0",
+      "description": "基于左侧来源自动生成结构化 XLSX 表格",
+      "icon": "table",
+      "outputType": "xlsx",
+      "bgColor": "#E8F5E9",
+      "color": "#2E7D32",
+      "tags": ["表格", "Excel"],
+      "beta": true,
+      "installDependencies": [
+        {
+          "type": "plugin",
+          "id": "document-skills@anthropic-agent-skills",
+          "marketplaceSource": "anthropics/skills"
+        }
+      ],
+      "promptTemplateId": "sys-notebook-xlsx-summary",
+      "runtimePlaceholders": {
+        "XLSX_CMD": "/document-skills:xlsx"
       }
     }
   ]
