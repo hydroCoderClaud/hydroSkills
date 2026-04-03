@@ -2,17 +2,6 @@
   "mcp-hydrocoder-ssh": {
     "command": "npx",
     "args": ["-y", "mcp-hydrocoder-ssh"],
-    "tools": [
-      "ssh_list_servers",
-      "ssh_connect",
-      "ssh_exec",
-      "ssh_get_status",
-      "ssh_disconnect",
-      "ssh_view_config",
-      "ssh_help",
-      "ssh_add_server",
-      "ssh_remove_server",
-      "ssh_update_server"
-    ]
+    "tools": ["*"]
   }
 }
