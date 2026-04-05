@@ -164,8 +164,9 @@
       "beta": true,
       "installDependencies": [
         {
-          "type": "skill",
-          "id": "frontend-design"
+          "type": "plugin",
+          "id": "frontend-design@anthropic-agent-skills",
+          "marketplaceSource": "anthropics/skills"
         }
       ],
       "promptTemplateId": "sys-notebook-html-slides",
