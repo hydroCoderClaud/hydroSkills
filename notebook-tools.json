@@ -154,7 +154,7 @@
     {
       "id": "html-slides",
       "name": "HTML 幻灯片生成",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "description": "基于左侧来源自动生成具有导航功能的单文件 HTML 幻灯片，支持底部导航、全屏切换和编辑模式",
       "icon": "presentation",
       "outputType": "html",
