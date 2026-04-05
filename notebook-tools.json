@@ -165,13 +165,13 @@
       "installDependencies": [
         {
           "type": "plugin",
-          "id": "frontend-design@anthropic-agent-skills",
+          "id": "document-skills@anthropic-agent-skills",
           "marketplaceSource": "anthropics/skills"
         }
       ],
       "promptTemplateId": "sys-notebook-html-slides",
       "runtimePlaceholders": {
-        "FRONTEND_DESIGN_CMD": "/frontend-design"
+        "FRONTEND_DESIGN_CMD": "/document-skills:frontend-design"
       }
     }
   ]
