@@ -162,7 +162,12 @@
       "color": "#3F51B5",
       "tags": ["幻灯片", "HTML", "演示"],
       "beta": true,
-      "installDependencies": [],
+      "installDependencies": [
+        {
+          "type": "skill",
+          "id": "frontend-design"
+        }
+      ],
       "promptTemplateId": "sys-notebook-html-slides",
       "runtimePlaceholders": {}
     }
