@@ -302,7 +302,8 @@ prompts/{promptTemplateId}.md
 
 要求：
 - 文件名与 `promptTemplateId` 保持一致
-- Notebook 工具专用 Prompt **不需要**加入 `index.json` 的 `prompts` 索引；`notebook-tools.json` 会直接通过 `promptTemplateId` 引用对应模板
+- Notebook 工具市场的安装 / 重装 / 更新检查 / 提示词预览，只依赖 `notebook-tools.json` 与 `prompts/{promptTemplateId}.md`
+- Notebook 工具专用 Prompt **禁止**加入 `index.json` 的 `prompts` 索引
 - Notebook Prompt 推荐使用简短 frontmatter（`name`、`description`）
 - 模板正文必须兼容以下占位符：
   - `{{sources}}`
@@ -311,6 +312,7 @@ prompts/{promptTemplateId}.md
 - 额外命令或工具名统一通过 `runtimePlaceholders` 注入，推荐使用大写占位符，例如 `{{IMAGE_TOOL}}`
 - Prompt 必须明确要求将最终产物保存到 `{{expected_path}}`
 - 若底层工具默认写入临时目录或自身输出目录，Prompt 应明确要求在生成完成后将最终产物整理、移动或重命名到 `{{expected_path}}`
+- **只要修改了 Notebook Prompt 正文，也必须同步递增对应工具在 `notebook-tools.json` 中的 `version`**，这样 cc-desktop 才能通过“更新版本”提示让已安装用户拉到新模板
 
 ### 运行时占位符规则
 
@@ -375,7 +377,8 @@ prompts/{promptTemplateId}.md
 1. `notebook-tools.json` 中工具条目是否已新增/更新
 2. 对应 `promptTemplateId` 的 Prompt 文件是否存在
 3. 若依赖 MCP / Skill / Agent / Plugin，相关组件是否已在市场中可安装
-4. 修改 `index.json` 后更新顶层 `updatedAt`（仅当你确实修改了 `index.json` 中的 skill / mcp / agent / plugin 注册信息时）
+4. **Notebook 工具或 Notebook Prompt 变更时，不要修改 `index.json`**
+5. 只有确实修改了 `index.json` 中的通用 `skill` / `prompt` / `agent` / `mcp` 注册信息时，才更新顶层 `updatedAt`
 6. 视频类工具复用 remotion-video 时，`promptTemplateId` 推荐 `sys-notebook-remotion-video`，并在 `prompts/sys-notebook-remotion-video.md` 维护模板
 
 ## agent-capabilities.json 能力清单规范

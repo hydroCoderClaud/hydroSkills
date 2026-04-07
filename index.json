@@ -1,7 +1,7 @@
 {
   "version": 1,
   "name": "HydroSkills Registry",
-  "updatedAt": "2026-04-06T00:00:00Z",
+  "updatedAt": "2026-04-06T10:18:28Z",
   "skills": [
     {
       "id": "remotion-video",
@@ -30,30 +30,6 @@
       "version": "1.0.0",
       "author": "HydroCoder",
       "tags": ["api", "docs", "generator"]
-    },
-    {
-      "id": "sys-notebook-notes",
-      "name": "笔记总结模板",
-      "description": "提取核心要点生成结构化笔记（Notebook 内置）",
-      "version": "1.0.0",
-      "author": "HydroCoder",
-      "tags": ["notebook", "notes", "summary"]
-    },
-    {
-      "id": "sys-notebook-remotion-video",
-      "name": "Notebook 视频制作模板",
-      "description": "基于来源材料生成 MP4 视频并归档到目标路径",
-      "version": "1.0.0",
-      "author": "HydroCoder",
-      "tags": ["notebook", "video", "remotion"]
-    },
-    {
-      "id": "sys-notebook-html-slides",
-      "name": "HTML 幻灯片生成模板",
-      "description": "生成具有导航功能的单文件 HTML 幻灯片，支持底部导航、全屏切换和编辑模式",
-      "version": "1.0.1",
-      "author": "HydroCoder",
-      "tags": ["notebook", "html", "slides", "presentation"]
     }
   ],
   "agents": [
