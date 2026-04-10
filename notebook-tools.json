@@ -109,14 +109,14 @@
     {
       "id": "generate-image",
       "name": "生成图片",
-      "version": "1.0.3",
+      "version": "1.0.4",
       "description": "基于左侧来源材料生成 JPG 图片",
       "icon": "image",
       "outputType": "jpg",
       "bgColor": "#E3F2FD",
       "color": "#1976D2",
       "tags": ["图片"],
-      "beta": true,
+      "beta": false,
       "installDependencies": [
         {
           "type": "mcp",
@@ -154,14 +154,14 @@
     {
       "id": "html-slides",
       "name": "HTML 幻灯片生成",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "description": "基于左侧来源自动生成具有导航功能的单文件 HTML 幻灯片，支持底部导航、全屏切换和编辑模式",
       "icon": "presentation",
       "outputType": "html",
       "bgColor": "#E8EAF6",
       "color": "#3F51B5",
       "tags": ["幻灯片", "HTML", "演示"],
-      "beta": true,
+      "beta": false,
       "installDependencies": [
         {
           "type": "plugin",
