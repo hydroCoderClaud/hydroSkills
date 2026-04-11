@@ -124,6 +124,7 @@
         }
       ],
       "promptTemplateId": "sys-notebook-generate-image",
+      "promptTemplateFile": "sys-notebook-generate-image-v1.0.6.md",
       "runtimePlaceholders": {
         "IMAGE_TOOL": "mcp__mcp-hydrocoder-image__generate_image"
       }
