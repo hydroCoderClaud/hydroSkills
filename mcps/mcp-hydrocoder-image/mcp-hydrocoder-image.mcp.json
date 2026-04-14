@@ -3,9 +3,11 @@
     "command": "npx",
     "args": ["-y", "mcp-hydrocoder-image"],
     "env": {
-      "GEMINI_API_KEY": "your-gemini-api-key-here",
+      "IMAGE_PROVIDER": "volcengine",
+      "VOLCENGINE_API_KEY": "your-volcengine-api-key-here",
+      "VOLCENGINE_MODEL": "doubao-seedream-4-5-251128",
+      "VOLCENGINE_API_BASE_URL": "https://ark.cn-beijing.volces.com/api/v3",
       "IMAGE_OUTPUT_DIR": "./hydroimage_output",
-      "GEMINI_API_BASE_URL": "",
       "API_TIMEOUT": "120000",
       "HTTPS_PROXY": "http://127.0.0.1:15236",
       "HTTP_PROXY": "http://127.0.0.1:15236"
