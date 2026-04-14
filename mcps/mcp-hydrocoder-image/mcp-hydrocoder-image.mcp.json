@@ -8,9 +8,7 @@
       "VOLCENGINE_MODEL": "doubao-seedream-4-5-251128",
       "VOLCENGINE_API_BASE_URL": "https://ark.cn-beijing.volces.com/api/v3",
       "IMAGE_OUTPUT_DIR": "./hydroimage_output",
-      "API_TIMEOUT": "120000",
-      "HTTPS_PROXY": "http://127.0.0.1:15236",
-      "HTTP_PROXY": "http://127.0.0.1:15236"
+      "API_TIMEOUT": "120000"
     },
     "tools": ["*"]
   }
