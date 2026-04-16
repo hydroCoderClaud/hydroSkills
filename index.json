@@ -47,7 +47,7 @@
       "id": "hydro-publisher",
       "name": "Hydro Publisher",
       "description": "本地网页发布与业务页面管理 MCP。支持业务目录、页面、模板、自定义 HTML、草稿/正式双轨、首页设置与宿主启动管理。默认使用 http://localhost:3900，可通过 WPH_PORT 与 WPH_BASE_URL 调整",
-      "version": "0.2.2",
+      "version": "0.2.3",
       "author": "ynzys",
       "tags": ["mcp", "publisher", "website", "html", "cms", "localhost"],
       "files": ["hydro-publisher.mcp.json"]
