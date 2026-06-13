@@ -25,9 +25,10 @@ When the user wants to install or configure WeChat publishing:
    - Claude Code
    - both
 4. Prefer `npx` unless the user explicitly wants global install.
-5. Generate or write the MCP config using the templates in [MCP Config](references/mcp-config.md).
-6. Tell the user to restart the Codex or Claude Code session after config changes.
-7. After restart, call the MCP `doctor` tool first.
+5. For Claude Code, prefer `claude mcp add --scope user` from [MCP Config](references/mcp-config.md) instead of manually editing JSON.
+6. For Codex, generate or write the MCP config using the templates in [MCP Config](references/mcp-config.md).
+7. Tell the user to restart the Codex or Claude Code session after config changes.
+8. After restart, call the MCP `doctor` tool first.
 
 If Node.js or npm is missing, stop and tell the user to install Node.js LTS first.
 
@@ -76,9 +77,11 @@ Treat `WECHAT_APP_SECRET` as a secret. Do not print it back to the user except a
 
 When editing config files, prefer:
 
-- Project-level `.mcp.json` for Claude Code when the user wants per-project setup.
+- `claude mcp add --scope user` for Claude Code user-level setup.
 - `~/.codex/config.toml` for Codex global setup.
 - Printing config snippets first if the user has not granted permission to write files.
+
+Only edit Claude Code JSON directly when the CLI is unavailable or the user explicitly asks for manual config. In that case, user-level Claude Code MCP config belongs in the appropriate section of the user home `.claude.json`, not in an arbitrary project file.
 
 Do not silently overwrite existing MCP config. Merge with existing config when possible.
 

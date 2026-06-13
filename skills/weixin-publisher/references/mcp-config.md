@@ -36,7 +36,65 @@ Global install command:
 npm install -g weixin-publisher
 ```
 
-## Claude Code .mcp.json
+## Claude Code
+
+Prefer configuring Claude Code with the CLI instead of hand-editing JSON. Ask the user for `WECHAT_APP_ID` and `WECHAT_APP_SECRET` first, then run one of these commands.
+
+Use `--scope user` for normal user-level setup. Claude Code stores this in the appropriate user-level Claude config, commonly the user's home `.claude.json`; do not create a random project `.mcp.json` unless the user explicitly wants project-local setup.
+
+Windows, npx:
+
+```powershell
+claude mcp add --scope user weixin-publisher `
+  -e WECHAT_APP_ID=your_app_id `
+  -e WECHAT_APP_SECRET=your_app_secret `
+  -e WECHAT_PUBLISH_MODE=draft `
+  -e WECHAT_REQUEST_TIMEOUT_MS=15000 `
+  -- cmd /c npx -y --package weixin-publisher wop-mcp
+```
+
+Windows, global install:
+
+```powershell
+claude mcp add --scope user weixin-publisher `
+  -e WECHAT_APP_ID=your_app_id `
+  -e WECHAT_APP_SECRET=your_app_secret `
+  -e WECHAT_PUBLISH_MODE=draft `
+  -e WECHAT_REQUEST_TIMEOUT_MS=15000 `
+  -- cmd /c wop-mcp
+```
+
+macOS/Linux, npx:
+
+```bash
+claude mcp add --scope user weixin-publisher \
+  -e WECHAT_APP_ID=your_app_id \
+  -e WECHAT_APP_SECRET=your_app_secret \
+  -e WECHAT_PUBLISH_MODE=draft \
+  -e WECHAT_REQUEST_TIMEOUT_MS=15000 \
+  -- npx -y --package weixin-publisher wop-mcp
+```
+
+macOS/Linux, global install:
+
+```bash
+claude mcp add --scope user weixin-publisher \
+  -e WECHAT_APP_ID=your_app_id \
+  -e WECHAT_APP_SECRET=your_app_secret \
+  -e WECHAT_PUBLISH_MODE=draft \
+  -e WECHAT_REQUEST_TIMEOUT_MS=15000 \
+  -- wop-mcp
+```
+
+After adding, run:
+
+```bash
+claude mcp list
+```
+
+Only use JSON snippets below for manual review, migration, or when `claude mcp add` is unavailable.
+
+## Claude Code Manual JSON Reference
 
 Windows, npx:
 
