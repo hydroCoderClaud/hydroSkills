@@ -1,7 +1,7 @@
 {
   "version": 1,
   "name": "HydroSkills Registry",
-  "updatedAt": "2026-04-16T00:00:00Z",
+  "updatedAt": "2026-06-13T00:00:00Z",
   "skills": [
     {
       "id": "remotion-video",
@@ -12,6 +12,24 @@
       "tags": ["video", "remotion", "react", "creative"],
       "files": ["SKILL.md"],
       "updatedAt": "2026-02-14T00:00:00Z"
+    },
+    {
+      "id": "weixin-publisher",
+      "name": "微信公众号发布助手",
+      "description": "引导安装 weixin-publisher，配置 Codex/Claude Code MCP，并按草稿优先流程制作公众号文章",
+      "version": "0.1.1",
+      "author": "ynzys",
+      "tags": ["wechat", "weixin", "official-account", "mcp", "publisher"],
+      "files": [
+        "SKILL.md",
+        "references/mcp-config.md",
+        "references/workflow.md",
+        "references/cover-generation.md",
+        "scripts/detect-install.mjs",
+        "scripts/generate-config.mjs",
+        "agents/openai.yaml"
+      ],
+      "updatedAt": "2026-06-13T00:00:00Z"
     }
   ],
   "prompts": [

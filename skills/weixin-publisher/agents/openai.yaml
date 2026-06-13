@@ -1,0 +1,8 @@
+interface:
+  display_name: "Weixin Publisher"
+  short_description: "Set up and use WeChat Official Account publishing"
+  brand_color: "#16A34A"
+  default_prompt: "Use $weixin-publisher to set up WeChat Official Account publishing and create a draft article."
+
+policy:
+  allow_implicit_invocation: true
