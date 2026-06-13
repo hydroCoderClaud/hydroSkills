@@ -99,29 +99,24 @@ Adding the MCP server only registers it. Claude Code may still ask the user to a
 Preferred setup:
 
 1. Restart Claude Code after `claude mcp add --scope user`.
-2. Ask Claude Code to call `doctor`.
-3. When Claude Code asks for tool permission, approve only the needed `weixin-publisher` tools.
+2. Allow the `weixin-publisher` MCP tool wildcard when Claude Code asks for tool permission.
+3. Ask Claude Code to call `doctor`.
 
-For a normal draft-first workflow, it is reasonable to allow these tools:
+The common wildcard is:
 
-- `doctor`
-- `render_article`
-- `prepare_cover`
-- `upload_cover`
-- `upload_inline_image`
-- `create_draft`
-- `get_draft`
-- `list_drafts`
-- `get_publish_status`
-- `list_published`
+```text
+mcp__weixin-publisher__*
+```
 
-Keep these tools as explicit per-use approvals unless the user intentionally wants automation with publish/delete power:
+If the user starts Claude Code from the command line and wants to pre-approve the tools for that session:
 
-- `submit_publish`
-- `delete_draft`
-- `update_draft`
+```bash
+claude --allowedTools "mcp__weixin-publisher__*"
+```
 
-If the user wants to start Claude Code with pre-approved tools for a session, use Claude Code's `--allowedTools` / `--allowed-tools` option and the exact MCP tool names shown by Claude Code. They commonly follow the pattern `mcp__weixin-publisher__tool_name`, but the UI/CLI output should be treated as the source of truth.
+Use the exact MCP namespace shown by Claude Code if it differs. Some UIs display the server tools with `*`; in that case, allow the whole `weixin-publisher` tool group.
+
+Tool permission is not content permission. Even with `mcp__weixin-publisher__*` allowed, the agent must still follow the workflow safety rule: create drafts by default, and only call `submit_publish` or `delete_draft` when the user explicitly asks to publish or delete.
 
 Only use JSON snippets below for manual review, migration, or when `claude mcp add` is unavailable.
 
