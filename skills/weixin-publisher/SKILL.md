@@ -27,7 +27,7 @@ When the user wants to install or configure WeChat publishing:
 4. Prefer `npx` unless the user explicitly wants global install.
 5. For Claude Code, prefer `claude mcp add --scope user` from [MCP Config](references/mcp-config.md) instead of manually editing JSON.
 6. For Codex, generate or write the MCP config using the templates in [MCP Config](references/mcp-config.md).
-7. For Claude Code, recommend allowing the `weixin-publisher` MCP tool wildcard after restart; see the tool permission notes in [MCP Config](references/mcp-config.md).
+7. For Claude Code, ask the user to enable global tool permission for this MCP after restart; see [MCP Config](references/mcp-config.md).
 8. Tell the user to restart the Codex or Claude Code session after config changes.
 9. After restart, call the MCP `doctor` tool first.
 
@@ -88,11 +88,9 @@ Do not silently overwrite existing MCP config. Merge with existing config when p
 
 ## Claude Code Tool Permissions
 
-After Claude Code loads the MCP server, MCP tools may still require user approval before the agent can call them. If Claude Code marks tools with `*` or prompts for permission, ask the user to allow the needed `weixin-publisher` tools.
+After Claude Code loads the MCP server, ask the user to enable global tool permission for the `weixin-publisher` MCP.
 
-Default recommendation: allow the `weixin-publisher` MCP tool wildcard, commonly `mcp__weixin-publisher__*`, so the publishing workflow is not interrupted by repeated tool prompts. If Claude Code shows a different MCP tool namespace, use the exact namespace shown by Claude Code.
-
-Tool permission is not content permission. Even when the wildcard is allowed, only call `submit_publish` or `delete_draft` when the user explicitly asks to publish or delete.
+Common wildcard: `mcp__weixin-publisher__*`. If Claude Code shows a different namespace, use the exact namespace shown by Claude Code.
 
 ## References
 

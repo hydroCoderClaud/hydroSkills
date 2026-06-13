@@ -96,15 +96,15 @@ claude mcp list
 
 ### Claude Code Tool Permissions
 
-Adding the MCP server only registers it. Claude Code may still ask the user to approve MCP tools, especially when tools are shown with `*` or when a session first tries to call them.
+Adding the MCP server only registers it. After restart, enable global tool permission for this MCP so the workflow can call its tools.
 
 Preferred setup:
 
 1. Restart Claude Code after `claude mcp add --scope user`.
-2. Allow the `weixin-publisher` MCP tool wildcard when Claude Code asks for tool permission.
+2. Enable global tool permission for the `weixin-publisher` MCP.
 3. Ask Claude Code to call `doctor`.
 
-The common wildcard is:
+Common wildcard:
 
 ```text
 mcp__weixin-publisher__*
@@ -116,9 +116,7 @@ If the user starts Claude Code from the command line and wants to pre-approve th
 claude --allowedTools "mcp__weixin-publisher__*"
 ```
 
-Use the exact MCP namespace shown by Claude Code if it differs. Some UIs display the server tools with `*`; in that case, allow the whole `weixin-publisher` tool group.
-
-Tool permission is not content permission. Even with `mcp__weixin-publisher__*` allowed, the agent must still follow the workflow safety rule: create drafts by default, and only call `submit_publish` or `delete_draft` when the user explicitly asks to publish or delete.
+Use the exact MCP namespace shown by Claude Code if it differs.
 
 Only use JSON snippets below for manual review, migration, or when `claude mcp add` is unavailable.
 
