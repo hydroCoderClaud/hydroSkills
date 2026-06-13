@@ -16,11 +16,19 @@ const appSecret = args.get('app-secret') ?? 'your_app_secret';
 
 const isWindows = platform === 'win32' || platform.toLowerCase().startsWith('win');
 
-function commandConfigJson() {
+function commandConfigJson({ avoidCmdShim = false } = {}) {
   if (install === 'global') {
+    if (isWindows && avoidCmdShim) {
+      return { command: 'wop-mcp.cmd' };
+    }
+
     return isWindows
       ? { command: 'cmd', args: ['/c', 'wop-mcp'] }
       : { command: 'wop-mcp' };
+  }
+
+  if (isWindows && avoidCmdShim) {
+    return { command: 'npx.cmd', args: ['-y', '--package', 'weixin-publisher', 'wop-mcp'] };
   }
 
   return isWindows
@@ -41,7 +49,7 @@ function printClaude() {
   const config = {
     mcpServers: {
       'weixin-publisher': {
-        ...commandConfigJson(),
+        ...commandConfigJson({ avoidCmdShim: true }),
         env: envJson(),
       },
     },

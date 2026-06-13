@@ -50,7 +50,7 @@ claude mcp add --scope user weixin-publisher `
   -e WECHAT_APP_SECRET=your_app_secret `
   -e WECHAT_PUBLISH_MODE=draft `
   -e WECHAT_REQUEST_TIMEOUT_MS=15000 `
-  -- cmd /c npx -y --package weixin-publisher wop-mcp
+  -- npx.cmd -y --package weixin-publisher wop-mcp
 ```
 
 Windows, global install:
@@ -61,8 +61,10 @@ claude mcp add --scope user weixin-publisher `
   -e WECHAT_APP_SECRET=your_app_secret `
   -e WECHAT_PUBLISH_MODE=draft `
   -e WECHAT_REQUEST_TIMEOUT_MS=15000 `
-  -- cmd /c wop-mcp
+  -- wop-mcp.cmd
 ```
+
+Avoid `cmd /c` in `claude mcp add` on Windows. Some shells or argument parsers can rewrite `/c` into `C:/`, which breaks the MCP command. Use `npx.cmd` or `wop-mcp.cmd` directly instead.
 
 macOS/Linux, npx:
 
@@ -128,8 +130,8 @@ Windows, npx:
 {
   "mcpServers": {
     "weixin-publisher": {
-      "command": "cmd",
-      "args": ["/c", "npx", "-y", "--package", "weixin-publisher", "wop-mcp"],
+      "command": "npx.cmd",
+      "args": ["-y", "--package", "weixin-publisher", "wop-mcp"],
       "env": {
         "WECHAT_APP_ID": "your_app_id",
         "WECHAT_APP_SECRET": "your_app_secret",
@@ -147,8 +149,7 @@ Windows, global install:
 {
   "mcpServers": {
     "weixin-publisher": {
-      "command": "cmd",
-      "args": ["/c", "wop-mcp"],
+      "command": "wop-mcp.cmd",
       "env": {
         "WECHAT_APP_ID": "your_app_id",
         "WECHAT_APP_SECRET": "your_app_secret",
