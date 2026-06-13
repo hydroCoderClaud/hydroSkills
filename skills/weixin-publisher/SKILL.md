@@ -27,8 +27,9 @@ When the user wants to install or configure WeChat publishing:
 4. Prefer `npx` unless the user explicitly wants global install.
 5. For Claude Code, prefer `claude mcp add --scope user` from [MCP Config](references/mcp-config.md) instead of manually editing JSON.
 6. For Codex, generate or write the MCP config using the templates in [MCP Config](references/mcp-config.md).
-7. Tell the user to restart the Codex or Claude Code session after config changes.
-8. After restart, call the MCP `doctor` tool first.
+7. For Claude Code, remind the user to approve the MCP tools after restart; see the tool permission notes in [MCP Config](references/mcp-config.md).
+8. Tell the user to restart the Codex or Claude Code session after config changes.
+9. After restart, call the MCP `doctor` tool first.
 
 If Node.js or npm is missing, stop and tell the user to install Node.js LTS first.
 
@@ -84,6 +85,12 @@ When editing config files, prefer:
 Only edit Claude Code JSON directly when the CLI is unavailable or the user explicitly asks for manual config. In that case, user-level Claude Code MCP config belongs in the appropriate section of the user home `.claude.json`, not in an arbitrary project file.
 
 Do not silently overwrite existing MCP config. Merge with existing config when possible.
+
+## Claude Code Tool Permissions
+
+After Claude Code loads the MCP server, MCP tools may still require user approval before the agent can call them. If Claude Code marks tools with `*` or prompts for permission, ask the user to allow the needed `weixin-publisher` tools.
+
+Do not recommend blanket permission for every tool by default. For a normal draft-first workflow, allow draft, cover, render, upload, and query/status tools. Keep `submit_publish` and `delete_draft` as explicit, case-by-case approvals because they can publish or remove content.
 
 ## References
 

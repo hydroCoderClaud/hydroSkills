@@ -92,6 +92,37 @@ After adding, run:
 claude mcp list
 ```
 
+### Claude Code Tool Permissions
+
+Adding the MCP server only registers it. Claude Code may still ask the user to approve MCP tools, especially when tools are shown with `*` or when a session first tries to call them.
+
+Preferred setup:
+
+1. Restart Claude Code after `claude mcp add --scope user`.
+2. Ask Claude Code to call `doctor`.
+3. When Claude Code asks for tool permission, approve only the needed `weixin-publisher` tools.
+
+For a normal draft-first workflow, it is reasonable to allow these tools:
+
+- `doctor`
+- `render_article`
+- `prepare_cover`
+- `upload_cover`
+- `upload_inline_image`
+- `create_draft`
+- `get_draft`
+- `list_drafts`
+- `get_publish_status`
+- `list_published`
+
+Keep these tools as explicit per-use approvals unless the user intentionally wants automation with publish/delete power:
+
+- `submit_publish`
+- `delete_draft`
+- `update_draft`
+
+If the user wants to start Claude Code with pre-approved tools for a session, use Claude Code's `--allowedTools` / `--allowed-tools` option and the exact MCP tool names shown by Claude Code. They commonly follow the pattern `mcp__weixin-publisher__tool_name`, but the UI/CLI output should be treated as the source of truth.
+
 Only use JSON snippets below for manual review, migration, or when `claude mcp add` is unavailable.
 
 ## Claude Code Manual JSON Reference
