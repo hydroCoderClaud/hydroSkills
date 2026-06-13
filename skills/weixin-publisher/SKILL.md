@@ -1,6 +1,6 @@
 ---
 name: weixin-publisher
-description: Use when the user wants to install, configure, or use the weixin-publisher npm package and MCP server to create WeChat Official Account drafts or publish articles from an agent. Covers Codex and Claude Code setup, credential injection, cover preparation, draft-first workflows, and safe publish behavior.
+description: Use when the user wants to install, configure, or use the weixin-publisher npm package and MCP server to create WeChat Official Account drafts or publish articles from an agent. Covers HydroDesktop, Claude Code, and Codex setup, credential injection, cover preparation, draft-first workflows, and safe publish behavior.
 ---
 
 # Weixin Publisher
@@ -21,15 +21,17 @@ When the user wants to install or configure WeChat publishing:
    - `WECHAT_APP_ID`
    - `WECHAT_APP_SECRET`
 3. Ask which host to configure:
-   - Codex
+   - HydroDesktop
    - Claude Code
-   - both
+   - Codex
+   - multiple hosts
 4. Prefer `npx` unless the user explicitly wants global install.
-5. For Claude Code, prefer `claude mcp add --scope user` from [MCP Config](references/mcp-config.md) instead of manually editing JSON.
-6. For Codex, generate or write the MCP config using the templates in [MCP Config](references/mcp-config.md).
-7. For Claude Code, ask the user to enable global tool permission for this MCP after restart; see [MCP Config](references/mcp-config.md).
-8. Tell the user to restart the Codex or Claude Code session after config changes.
-9. After restart, call the MCP `doctor` tool first.
+5. For HydroDesktop, prefer the hydroSkills marketplace path: install the `微信公众号发布助手` skill, then install the `微信公众号发布 MCP`, and replace the placeholder `WECHAT_APP_ID` / `WECHAT_APP_SECRET`.
+6. For Claude Code, prefer `claude mcp add --scope user` from [MCP Config](references/mcp-config.md) instead of manually editing JSON.
+7. For Codex, generate or write the MCP config using the templates in [MCP Config](references/mcp-config.md).
+8. For Claude Code, ask the user to enable global tool permission for this MCP after restart; see [MCP Config](references/mcp-config.md).
+9. Tell the user to restart the HydroDesktop, Claude Code, or Codex session after config changes.
+10. After restart, call the MCP `doctor` tool first.
 
 If Node.js or npm is missing, stop and tell the user to install Node.js LTS first.
 
@@ -44,11 +46,16 @@ After MCP is available:
    - rough outline or source material
    - whether to stop at draft or publish
 3. Create or gather article content.
-4. If a cover is needed, follow [Cover Generation](references/cover-generation.md).
-5. Call `prepare_cover` for any local cover image.
-6. Call `create_draft`.
-7. Return the `draftMediaId`, `displayMessage`, and `userHint`.
-8. Only call `submit_publish` if the user explicitly asks for final publish.
+4. Default to `contentMarkdown` for ordinary articles.
+5. Use the basic render preset unless the user wants raw HTML:
+   - `stylePreset: "clean"` for the normal path
+   - `fontSize: 15` for body text
+   - `stylePreset: "plain"` only when the user wants minimal styling
+6. If a cover is needed, follow [Cover Generation](references/cover-generation.md).
+7. Call `prepare_cover` for any local cover image.
+8. Call `create_draft`.
+9. Return the `draftMediaId`, `displayMessage`, and `userHint`.
+10. Only call `submit_publish` if the user explicitly asks for final publish.
 
 Never call `delete_draft` unless the user explicitly asks to delete a specific draft.
 

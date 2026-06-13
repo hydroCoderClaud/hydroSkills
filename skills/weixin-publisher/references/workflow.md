@@ -29,6 +29,8 @@ Use `contentMarkdown` for ordinary articles.
 
 Use `contentHtml` only when the user needs exact HTML control or a later engineering workflow provides WeChat-compatible HTML.
 
+Markdown rendering defaults to `stylePreset: "clean"` with 15px body text. This adds conservative WeChat-friendly inline styles for headings, paragraphs, lists, quotes, images, and code blocks. Use `stylePreset: "plain"` when the user wants unstyled HTML.
+
 Recommended fields:
 
 ```json
@@ -38,6 +40,8 @@ Recommended fields:
   "summary": "Short summary",
   "digest": "Short digest",
   "contentMarkdown": "Markdown content",
+  "stylePreset": "clean",
+  "fontSize": 15,
   "publishMode": "draft",
   "needOpenComment": false,
   "onlyFansCanComment": false
