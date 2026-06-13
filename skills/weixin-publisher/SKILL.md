@@ -47,10 +47,11 @@ After MCP is available:
    - whether to stop at draft or publish
 3. Create or gather article content.
 4. Default to `contentMarkdown` for ordinary articles.
-5. Use the basic render preset unless the user wants raw HTML:
-   - `stylePreset: "clean"` for the normal path
-   - `fontSize: 15` for body text
-   - `stylePreset: "plain"` only when the user wants minimal styling
+5. Use the default render preset unless the user wants raw HTML:
+   - `stylePreset: "default"` for the normal path
+   - `fontSize: 14` for body text
+   - `stylePreset: "classic"` for a plainer fallback layout when the user wants a more conservative article style
+   - `titleColor` and `numberColor` as optional hex colors when the user wants custom heading accents
 6. If a cover is needed, follow [Cover Generation](references/cover-generation.md).
 7. Call `prepare_cover` for any local cover image.
 8. Call `create_draft`.

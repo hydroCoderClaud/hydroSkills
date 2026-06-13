@@ -29,7 +29,15 @@ Use `contentMarkdown` for ordinary articles.
 
 Use `contentHtml` only when the user needs exact HTML control or a later engineering workflow provides WeChat-compatible HTML.
 
-Markdown rendering defaults to `stylePreset: "clean"` with 15px body text. This adds conservative WeChat-friendly inline styles for headings, paragraphs, lists, quotes, images, and code blocks. Use `stylePreset: "plain"` when the user wants unstyled HTML.
+Markdown rendering defaults to `stylePreset: "default"` with 14px body text. This uses a polished long-form WeChat article style with thin body text, WeChat-green anchors, fine rules, and mobile-friendly spacing.
+
+Use `stylePreset: "classic"` when the user wants a plainer fallback style with more conservative headings and tighter spacing.
+
+Heading accents can be customized with safe hex colors:
+
+- `titleColor` controls non-numeric headings.
+- `numberColor` controls numeric marker headings such as `# 1.5`.
+- Good defaults are `#18a96f`, `#149362`, `#2aa876`, `#2f7f6f`, `#2b3941`, and `#b68a35`.
 
 Recommended fields:
 
@@ -40,8 +48,10 @@ Recommended fields:
   "summary": "Short summary",
   "digest": "Short digest",
   "contentMarkdown": "Markdown content",
-  "stylePreset": "clean",
-  "fontSize": 15,
+  "stylePreset": "default",
+  "fontSize": 14,
+  "titleColor": "#18a96f",
+  "numberColor": "#18a96f",
   "publishMode": "draft",
   "needOpenComment": false,
   "onlyFansCanComment": false
