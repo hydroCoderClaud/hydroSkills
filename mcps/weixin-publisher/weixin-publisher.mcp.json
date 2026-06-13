@@ -1,0 +1,13 @@
+{
+  "weixin-publisher": {
+    "command": "npx",
+    "args": ["-y", "--package", "weixin-publisher", "wop-mcp"],
+    "env": {
+      "WECHAT_APP_ID": "your-wechat-app-id-here",
+      "WECHAT_APP_SECRET": "your-wechat-app-secret-here",
+      "WECHAT_PUBLISH_MODE": "draft",
+      "WECHAT_REQUEST_TIMEOUT_MS": "15000"
+    },
+    "tools": ["*"]
+  }
+}
