@@ -101,14 +101,28 @@ Adding the MCP server only registers it. After restart, enable global tool permi
 Preferred setup:
 
 1. Restart Claude Code after `claude mcp add --scope user`.
-2. Enable global tool permission for the `weixin-publisher` MCP.
+2. Add the tool wildcard to the user-level `~/.claude/settings.json`.
 3. Ask Claude Code to call `doctor`.
 
-Common wildcard:
+Add this entry to `permissions.allow`:
 
 ```text
 mcp__weixin-publisher__*
 ```
+
+Example:
+
+```json
+{
+  "permissions": {
+    "allow": [
+      "mcp__weixin-publisher__*"
+    ]
+  }
+}
+```
+
+Do not write this global MCP tool permission to `settings.local.json`; that file is local/project-scoped and can make the global Claude Code setup look successful while other sessions still lack permission.
 
 If the user starts Claude Code from the command line and wants to pre-approve the tools for that session:
 

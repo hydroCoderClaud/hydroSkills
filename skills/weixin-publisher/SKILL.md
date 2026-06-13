@@ -88,9 +88,9 @@ Do not silently overwrite existing MCP config. Merge with existing config when p
 
 ## Claude Code Tool Permissions
 
-After Claude Code loads the MCP server, ask the user to enable global tool permission for the `weixin-publisher` MCP.
+After Claude Code loads the MCP server, ask the user to enable global tool permission for the `weixin-publisher` MCP in the user-level `~/.claude/settings.json`.
 
-Common wildcard: `mcp__weixin-publisher__*`. If Claude Code shows a different namespace, use the exact namespace shown by Claude Code.
+Add `mcp__weixin-publisher__*` to `permissions.allow`. Do not put this global permission in `settings.local.json`.
 
 ## References
 
