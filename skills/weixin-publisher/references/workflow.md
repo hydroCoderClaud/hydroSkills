@@ -17,6 +17,7 @@ If the user says they want to make an article but does not provide enough detail
 
 - What is the topic or working title?
 - Who is the audience?
+- Do you want to use the default `wechat-green` theme, or choose `rose-magenta`, `soft-purple`, or `ocean-blue`?
 - Do you want a draft only or final publish?
 - Do you have source text, notes, or links?
 - Do you need a cover image?
@@ -29,15 +30,32 @@ Use `contentMarkdown` for ordinary articles.
 
 Use `contentHtml` only when the user needs exact HTML control or a later engineering workflow provides WeChat-compatible HTML.
 
-Markdown rendering defaults to `stylePreset: "default"` with 14px body text. This uses a polished long-form WeChat article style with thin body text, WeChat-green anchors, fine rules, and mobile-friendly spacing.
+Markdown rendering defaults to `stylePreset: "default"` with 14px body text and 16px headings/numeric marker headings. This uses a polished long-form WeChat article style with thin body text, WeChat-green anchors, fine rules, and mobile-friendly spacing.
 
 Use `stylePreset: "classic"` when the user wants a plainer fallback style with more conservative headings and tighter spacing.
 
-Heading accents can be customized with safe hex colors:
+Theme accents can be selected with `themePreset`:
+
+- `wechat-green`: title `#18a96f`, number `#18a96f`, quote border `#18a96f`, quote background `#fbfefd`
+- `rose-magenta`: title `#c24d76`, number `#b33f69`, quote border `#d86a92`, quote background `#fff8fb`
+- `soft-purple`: title `#8b6fd6`, number `#7a5fc9`, quote border `#a58ee2`, quote background `#fbf9ff`
+- `ocean-blue`: title `#2f86b7`, number `#2777a6`, quote border `#5aa6cc`, quote background `#f6fcff`
+
+Each theme preset coordinates four colors:
 
 - `titleColor` controls non-numeric headings.
 - `numberColor` controls numeric marker headings such as `# 1.5`.
-- Good defaults are `#18a96f`, `#149362`, `#2aa876`, `#2f7f6f`, `#2b3941`, and `#b68a35`.
+- `quoteBorderColor` controls the quote/callout left border.
+- `quoteBackgroundColor` controls the quote/callout background.
+- Ordinary body text and quote text stay low-saturation gray for readability.
+- Do not ask for all four colors by default; ask for a theme preset first, then override individual colors only when the user asks.
+
+Font sizes can be customized when the user asks:
+
+- `fontSize` controls ordinary body text, list text, and quote text. Default: `14`.
+- `titleFontSize` controls non-numeric headings. Default: `16`.
+- `numberFontSize` controls numeric marker headings such as `# 1.5`. Default: `16`.
+- Do not ask about font sizes by default; only set these fields when the user gives a preference or when you need to preserve an explicit brief.
 
 ## Markdown Structure For Built-In Design
 
@@ -76,9 +94,14 @@ Recommended fields:
   "digest": "Short digest",
   "contentMarkdown": "Markdown content",
   "stylePreset": "default",
+  "themePreset": "wechat-green",
   "fontSize": 14,
+  "titleFontSize": 16,
+  "numberFontSize": 16,
   "titleColor": "#18a96f",
   "numberColor": "#18a96f",
+  "quoteBorderColor": "#18a96f",
+  "quoteBackgroundColor": "#fbfefd",
   "publishMode": "draft",
   "needOpenComment": false,
   "onlyFansCanComment": false

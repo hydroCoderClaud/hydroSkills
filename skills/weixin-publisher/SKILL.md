@@ -44,14 +44,20 @@ After MCP is available:
    - topic/title
    - target audience
    - rough outline or source material
+   - preferred theme preset, or use default `wechat-green`
    - whether to stop at draft or publish
 3. Create or gather article content.
 4. Default to `contentMarkdown` for ordinary articles.
 5. Use the default render preset unless the user wants raw HTML:
    - `stylePreset: "default"` for the normal path
    - `fontSize: 14` for body text
+   - `titleFontSize: 16` for non-numeric headings
+   - `numberFontSize: 16` for numeric marker headings such as `# 1` or `# 1.5`
    - `stylePreset: "classic"` for a plainer fallback layout when the user wants a more conservative article style
-   - `titleColor` and `numberColor` as optional hex colors when the user wants custom heading accents
+   - `themePreset: "wechat-green"` unless the user chooses `rose-magenta`, `soft-purple`, or `ocean-blue`
+   - treat the theme preset as four coordinated colors: non-numeric heading color, numeric marker heading color, quote/callout left border color, and quote/callout background color
+   - only set `titleColor`, `numberColor`, `quoteBorderColor`, or `quoteBackgroundColor` when the user explicitly wants to override the selected theme preset
+   - do not ask about font sizes by default; use the defaults unless the user asks for larger or smaller text
 6. Shape generated Markdown so the built-in article design is actually used:
    - use numeric marker headings such as `# 1`, `# 1.1`, or `# 1.5` before major sections
    - follow each numeric marker with a normal section heading such as `## Section title`
