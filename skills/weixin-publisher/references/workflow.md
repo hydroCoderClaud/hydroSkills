@@ -5,11 +5,22 @@
 Default to draft creation. This is the safest normal path:
 
 1. `doctor`
-2. `prepare_cover` if using a local cover image
-3. `create_draft`
-4. `get_draft` if the user wants to inspect the saved draft
+2. `preview_article` if the user wants to inspect local layout before touching WeChat
+3. `prepare_cover` if using a local cover image
+4. `create_draft`
+5. `get_draft` if the user wants to inspect the saved draft
 
 Only call `submit_publish` when the user explicitly says to publish, formally publish, submit, or send the article live.
+
+## Local Pseudo Preview
+
+Use `preview_article` when the user wants to see the layout before creating a WeChat draft.
+
+- It writes a standalone local HTML file and returns `filePath` / `fileUrl`.
+- If `outputPath` is omitted, it writes to `./wxpub_output/<title>.preview.html` under the current working directory.
+- It does not call WeChat APIs, upload images, create drafts, or send preview messages.
+- It is useful for checking theme color, font size, numeric headings, quotes, lists, code blocks, and approximate mobile width.
+- It is not the WeChat backend preview. Final rendering can still differ slightly in the Official Account editor and on mobile WeChat.
 
 ## Asking for Content
 

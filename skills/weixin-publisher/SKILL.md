@@ -69,12 +69,15 @@ After MCP is available:
    - use inline code only for real parameter names, commands, field names, and config values such as `themePreset`, `fontSize`, `rose-magenta`, or `wop-mcp`
    - do not wrap ordinary Chinese sentences, prompt examples, or prose fragments in backticks; use normal lists, bold text, or blockquotes instead
    - do not hand-write HTML for ordinary paragraphs, headings, lists, or quotes
-7. If a cover is needed, follow [Cover Generation](references/cover-generation.md).
-8. Call `prepare_cover` for any local cover image.
-9. Call `create_draft`.
-10. Call `get_draft` to verify the saved title, digest, and body do not contain mojibake such as repeated `?`, `�`, `Ã`, or `ä¸`.
-11. Return the `draftMediaId`, `displayMessage`, and `userHint`.
-12. Only call `submit_publish` if the user explicitly asks for final publish.
+7. If the user wants to inspect layout before creating a draft, call `preview_article`.
+   - Explain that this is a local HTML pseudo-preview, not a WeChat backend preview.
+   - Return the local `filePath` or `fileUrl` so the user can open it.
+8. If a cover is needed, follow [Cover Generation](references/cover-generation.md).
+9. Call `prepare_cover` for any local cover image.
+10. Call `create_draft`.
+11. Call `get_draft` to verify the saved title, digest, and body do not contain mojibake such as repeated `?`, `�`, `Ã`, or `ä¸`.
+12. Return the `draftMediaId`, `displayMessage`, and `userHint`.
+13. Only call `submit_publish` if the user explicitly asks for final publish.
 
 Never call `delete_draft` unless the user explicitly asks to delete a specific draft.
 
@@ -90,6 +93,7 @@ Read MCP results in this order:
 Use these MCP tools as the normal path:
 
 - `doctor`
+- `preview_article`
 - `prepare_cover`
 - `upload_cover`
 - `create_draft`
