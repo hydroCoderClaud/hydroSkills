@@ -44,7 +44,7 @@ After MCP is available:
    - topic/title
    - target audience
    - rough outline or source material
-   - preferred theme preset, or use default `wechat-green`
+   - preferred theme preset or one primary `themeColor`, or use default `wechat-green`
    - whether to stop at draft or publish
 3. Create or gather article content.
 4. Default to `contentMarkdown` for ordinary articles.
@@ -55,19 +55,26 @@ After MCP is available:
    - `numberFontSize: 16` for numeric marker headings such as `# 1` or `# 1.5`
    - `stylePreset: "classic"` for a plainer fallback layout when the user wants a more conservative article style
    - `themePreset: "wechat-green"` unless the user chooses `rose-magenta`, `soft-purple`, or `ocean-blue`
-   - treat the theme preset as four coordinated colors: non-numeric heading color, numeric marker heading color, quote/callout left border color, and quote/callout background color
-   - only set `titleColor`, `numberColor`, `quoteBorderColor`, or `quoteBackgroundColor` when the user explicitly wants to override the selected theme preset
+   - use `themeColor` only when the user gives one custom primary color; the renderer derives a coordinated palette from it
+   - treat a theme as a coordinated palette for headings, numeric markers, heading lines, dividers, links, inline code, quote/callout blocks, and code blocks
+   - only set individual color fields when the user explicitly wants advanced fine tuning
    - do not ask about font sizes by default; use the defaults unless the user asks for larger or smaller text
+   - comments are enabled by default; set `needOpenComment: false` only when the user explicitly asks to disable comments
+   - keep `onlyFansCanComment: false` unless the user explicitly asks to allow follower-only comments
+   - do not promise automatic featured comment selection; current public draft/publish fields only cover opening comments and follower-only comments
 6. Shape generated Markdown so the built-in article design is actually used:
    - use numeric marker headings such as `# 1`, `# 1.1`, or `# 1.5` before major sections
    - follow each numeric marker with a normal section heading such as `## Section title`
    - use Markdown blockquotes (`> key sentence`) for pull quotes, key ideas, and summary lines
+   - use inline code only for real parameter names, commands, field names, and config values such as `themePreset`, `fontSize`, `rose-magenta`, or `wop-mcp`
+   - do not wrap ordinary Chinese sentences, prompt examples, or prose fragments in backticks; use normal lists, bold text, or blockquotes instead
    - do not hand-write HTML for ordinary paragraphs, headings, lists, or quotes
 7. If a cover is needed, follow [Cover Generation](references/cover-generation.md).
 8. Call `prepare_cover` for any local cover image.
 9. Call `create_draft`.
-10. Return the `draftMediaId`, `displayMessage`, and `userHint`.
-11. Only call `submit_publish` if the user explicitly asks for final publish.
+10. Call `get_draft` to verify the saved title, digest, and body do not contain mojibake such as repeated `?`, `�`, `Ã`, or `ä¸`.
+11. Return the `draftMediaId`, `displayMessage`, and `userHint`.
+12. Only call `submit_publish` if the user explicitly asks for final publish.
 
 Never call `delete_draft` unless the user explicitly asks to delete a specific draft.
 
