@@ -52,11 +52,16 @@ After MCP is available:
    - `fontSize: 14` for body text
    - `stylePreset: "classic"` for a plainer fallback layout when the user wants a more conservative article style
    - `titleColor` and `numberColor` as optional hex colors when the user wants custom heading accents
-6. If a cover is needed, follow [Cover Generation](references/cover-generation.md).
-7. Call `prepare_cover` for any local cover image.
-8. Call `create_draft`.
-9. Return the `draftMediaId`, `displayMessage`, and `userHint`.
-10. Only call `submit_publish` if the user explicitly asks for final publish.
+6. Shape generated Markdown so the built-in article design is actually used:
+   - use numeric marker headings such as `# 1`, `# 1.1`, or `# 1.5` before major sections
+   - follow each numeric marker with a normal section heading such as `## Section title`
+   - use Markdown blockquotes (`> key sentence`) for pull quotes, key ideas, and summary lines
+   - do not hand-write HTML for ordinary paragraphs, headings, lists, or quotes
+7. If a cover is needed, follow [Cover Generation](references/cover-generation.md).
+8. Call `prepare_cover` for any local cover image.
+9. Call `create_draft`.
+10. Return the `draftMediaId`, `displayMessage`, and `userHint`.
+11. Only call `submit_publish` if the user explicitly asks for final publish.
 
 Never call `delete_draft` unless the user explicitly asks to delete a specific draft.
 

@@ -39,6 +39,33 @@ Heading accents can be customized with safe hex colors:
 - `numberColor` controls numeric marker headings such as `# 1.5`.
 - Good defaults are `#18a96f`, `#149362`, `#2aa876`, `#2f7f6f`, `#2b3941`, and `#b68a35`.
 
+## Markdown Structure For Built-In Design
+
+When generating a WeChat article from scratch, use this Markdown structure so the visual template has enough semantic cues to work with:
+
+```markdown
+# 1
+## Section title
+
+Ordinary body paragraph.
+
+> Pull quote, key idea, or section takeaway.
+
+# 1.1
+## Subsection title
+
+Ordinary body paragraph.
+```
+
+Rendering triggers:
+
+- `# 1`, `# 1.1`, or `# 1.5` triggers the numeric marker heading style.
+- `## Section title` triggers the section title style.
+- `> key sentence` triggers the quote or callout block style.
+- Ordinary paragraphs should stay as plain Markdown text, not hand-written HTML.
+
+For most generated articles, include 3 to 5 numbered sections. Do not add numeric marker headings before every short paragraph; use them only to mark real section boundaries.
+
 Recommended fields:
 
 ```json
