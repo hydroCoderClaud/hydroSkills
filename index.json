@@ -17,7 +17,7 @@
       "id": "weixin-publisher",
       "name": "微信公众号发布助手",
       "description": "引导安装 weixin-publisher，配置 Codex/Claude Code MCP，并按草稿优先流程制作公众号文章",
-      "version": "0.1.6",
+      "version": "0.1.7",
       "author": "ynzys",
       "tags": ["wechat", "weixin", "official-account", "mcp", "publisher"],
       "files": [
@@ -74,7 +74,7 @@
       "id": "weixin-publisher",
       "name": "微信公众号发布 MCP",
       "description": "基于 weixin-publisher 的微信公众号发布 MCP。支持从 Agent 创建草稿、更新/查询/删除草稿、准备封面、上传图片，并在明确确认后提交正式发布。默认使用 npx 启动，无需全局安装；需配置 WECHAT_APP_ID 与 WECHAT_APP_SECRET",
-      "version": "0.1.6",
+      "version": "0.1.7",
       "author": "ynzys",
       "tags": ["mcp", "wechat", "weixin", "official-account", "publisher", "draft"],
       "files": ["weixin-publisher.mcp.json"]
