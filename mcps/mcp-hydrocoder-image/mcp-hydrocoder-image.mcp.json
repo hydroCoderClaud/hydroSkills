@@ -7,6 +7,8 @@
       "VOLCENGINE_API_KEY": "your-volcengine-api-key-here",
       "VOLCENGINE_MODEL": "doubao-seedream-4-5-251128",
       "VOLCENGINE_API_BASE_URL": "https://ark.cn-beijing.volces.com/api/v3",
+      "GEMINI_API_KEY": "your-gemini-api-key-here",
+      "GEMINI_API_BASE_URL": "https://generativelanguage.googleapis.com",
       "IMAGE_OUTPUT_DIR": "./hydroimage_output",
       "API_TIMEOUT": "120000"
     },

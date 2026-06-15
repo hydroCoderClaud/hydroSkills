@@ -1,7 +1,7 @@
 {
   "version": 1,
   "name": "HydroSkills Registry",
-  "updatedAt": "2026-06-13T00:00:00Z",
+  "updatedAt": "2026-06-15T00:00:00Z",
   "skills": [
     {
       "id": "remotion-video",
@@ -82,8 +82,8 @@
     {
       "id": "mcp-hydrocoder-image",
       "name": "HydroCoder 文生图",
-      "description": "基于 mcp-hydrocoder-image 的 AI 图片生成，支持文生图、图片编辑、多图合成，默认提供火山引擎配置；如需 Gemini 可手动改为 Gemini 环境变量。需设置 IMAGE_OUTPUT_DIR 与对应 provider 的 API Key",
-      "version": "1.2.0",
+      "description": "基于 mcp-hydrocoder-image 的 AI 图片生成，支持文生图、图片编辑、多图合成。默认提供火山引擎配置，也可同时保留 Gemini 环境变量；当调用方明确提到火山/豆包/Gemini 时可自动路由到对应 provider。需设置 IMAGE_OUTPUT_DIR 与对应 provider 的 API Key",
+      "version": "1.2.1",
       "author": "ynzys",
       "tags": ["mcp", "image", "volcengine", "gemini", "text-to-image", "image-editing", "multi-image"],
       "files": ["mcp-hydrocoder-image.mcp.json"]
