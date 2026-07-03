@@ -1,8 +1,17 @@
 {
   "version": 1,
   "name": "HydroSkills Registry",
-  "updatedAt": "2026-06-15T00:00:00Z",
+  "updatedAt": "2026-07-03T00:00:00Z",
   "skills": [
+    {
+      "id": "remotion-best-practices",
+      "name": "Remotion 最佳实践",
+      "description": "Remotion 视频开发领域知识库，涵盖合成、时序、音频、字幕、转场、特效等最佳实践，处理 Remotion 代码时自动触发",
+      "version": "1.0.0",
+      "author": "ynzys",
+      "tags": ["video", "remotion", "react", "animation", "best-practices"],
+      "updatedAt": "2026-07-03T00:00:00Z"
+    },
     {
       "id": "remotion-video",
       "name": "Remotion 视频创作",
