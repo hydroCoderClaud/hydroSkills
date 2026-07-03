@@ -11,7 +11,6 @@ cc-desktop 通过 `{registryUrl}/index.json` 发现和安装组件。用户在 c
 ## 关键文件
 
 - `index.json` — 唯一注册表入口，cc-desktop 据此发现所有组件
-- `agent-capabilities.json` — 能力清单，将组件（含第三方插件）按功能分类，供 cc-desktop 展示"能力卡片"
 - `skills/{skill-id}/SKILL.md` — Skill 主文件（每个 Skill 一个目录）
 - `prompts/{prompt-id}.md` — Prompt 文件（纯文本，无 frontmatter）
 - `agents/{agent-id}.md` — Agent 文件（必须含 YAML frontmatter）
@@ -23,8 +22,7 @@ cc-desktop 通过 `{registryUrl}/index.json` 发现和安装组件。用户在 c
 3. **更新顶层时间戳**：修改 index.json 中任何组件后，更新顶层 `updatedAt`
 4. **ID = 文件路径**：组件 `id` 直接决定文件位置。ID 只允许 `[a-z0-9-]`
 5. **name 一致性**：Skill 的 frontmatter `name` = 目录名；Agent 的 frontmatter `name` = 文件名（不含 `.md`）
-6. **agent-capabilities.json 同步**：添加新组件时，评估是否需要在 agent-capabilities.json 中添加对应能力条目
-7. **MCP id = 服务器名**：MCP 条目的 `id` 字段**必须**与配置文件（`.mcp.json`）中 `mcpServers` 的 JSON key（服务器名）保持一致。cc-desktop 通过 `item.id` 查找已安装状态，若不一致则已安装检测失效。例如：`id: "context7"` → 配置文件中必须有 `{ "context7": { ... } }`
+6. **MCP id = 服务器名**：MCP 条目的 `id` 字段**必须**与配置文件（`.mcp.json`）中 `mcpServers` 的 JSON key（服务器名）保持一致。cc-desktop 通过 `item.id` 查找已安装状态，若不一致则已安装检测失效。例如：`id: "context7"` → 配置文件中必须有 `{ "context7": { ... } }`
 
 ## index.json 结构
 
@@ -51,7 +49,9 @@ Skills 额外支持 `files`（默认 `["SKILL.md"]`）和 `updatedAt`。Prompts/
 skills/{skill-id}/SKILL.md
 ```
 
-必须包含 YAML frontmatter（`name` + `description`）。`description` 决定 Claude 何时自动触发。正文是被调用时的完整系统提示。可通过 index.json `files` 数组声明附加文件。
+必须包含 YAML frontmatter（`name` + `description`）。`description` 决定 Claude 何时自动触发。正文是被调用时的完整系统提示。
+
+**`files` 字段说明**：cc-desktop 安装 skill 时优先使用 `npx skills add` 整目录克隆，此时 `files` 字段无需填写。仅在 npx 路径失败 fallback 到 HTTP 逐文件下载时才依赖 `files`。对含子目录的多文件 skill（如 `rules/` 目录），建议在 index.json 中填写完整 `files` 列表，确保 fallback 路径也能完整安装。
 
 ### Prompts — 单文件，纯文本
 
@@ -381,64 +381,6 @@ prompts/{promptTemplateId}.md
 5. 只有确实修改了 `index.json` 中的通用 `skill` / `prompt` / `agent` / `mcp` 注册信息时，才更新顶层 `updatedAt`
 6. 视频类工具复用 remotion-video 时，`promptTemplateId` 推荐 `sys-notebook-remotion-video`，并在 `prompts/sys-notebook-remotion-video.md` 维护模板
 
-## agent-capabilities.json 能力清单规范
-
-为 cc-desktop 的 **Agent 模式** 提供能力清单。Agent 模式下，cc-desktop 读取此文件，将所有可用能力（本仓库组件 + 第三方插件）按功能分类展示为"能力卡片"，供用户一键启用。
-
-### 顶层结构
-
-```json
-{
-  "version": "1.1",
-  "capabilities": []
-}
-```
-
-| 字段 | 类型 | 必填 | 说明 |
-|------|------|------|------|
-| `version` | string | 是 | 能力清单格式版本，当前为 `"1.1"`（一能力一组件模型） |
-| `capabilities` | array | 是 | 能力条目数组 |
-
-### 能力条目字段
-
-| 字段 | 类型 | 必填 | 说明 |
-|------|------|------|------|
-| `id` | string | 是 | 能力唯一标识，同一文件内不可重复 |
-| `name` | string | 是 | 显示名称，展示在能力卡片上 |
-| `description` | string | 是 | 能力描述，展示在卡片副标题 |
-| `icon` | string | 是 | 图标名。可选值：`search`、`check`、`git`、`code`、`star`、`fileText`、`plugin`、`folder`、`image` 等（参见 cc-desktop Icon 组件） |
-| `type` | string | 是 | 组件类型：`skill`、`agent`、`plugin`、`mcp` |
-| `componentId` | string | 是 | 关联的组件标识（见下方说明） |
-| `category` | string | 是 | 功能分类标识（见下方说明） |
-| `categoryName` | object | 是 | 分类的多语言显示名称，含 `zh-CN` 和 `en-US` 字段 |
-
-### componentId 格式
-
-- **本仓库组件**（skill/agent/mcp）：直接使用 index.json 中的 `id`，如 `"my-code-review"`、`"filesystem"`
-- **第三方插件**（plugin）：格式为 `{pluginId}@{marketplace}`，如 `"serena@claude-plugins-official"`
-
-当前出现的 marketplace 标识：`claude-plugins-official`、`claude-code-plugins`、`anthropic-agent-skills`、`superpowers-marketplace`。
-
-### category 分类
-
-| 分类 | categoryName (zh-CN) | categoryName (en-US) |
-|------|------|------|
-| `code-review` | 代码审查 | Code Review |
-| `test-automation` | 测试自动化 | Test Automation |
-| `git-workflow` | Git 工作流 | Git Workflow |
-| `code-intelligence` | 代码智能 | Code Intelligence |
-| `code-quality` | 代码质量 | Code Quality |
-| `documentation` | 文档处理 | Documentation |
-| `developer-tools` | 开发者工具 | Developer Tools |
-| `creative` | 创意工具 | Creative Tools |
-| `tools` | 实用工具 | Utility Tools |
-
-添加新分类时：`category` 保持 kebab-case，`categoryName` 必须同时提供中英文。
-
-### 核心设计原则
-
-**一能力一组件（v1.1）**：每个能力条目只关联一个具体组件，不做聚合。同一功能领域的不同实现（如 skill、agent、plugin）各自有独立的能力条目，通过 `category` 归类。
-
 ## 常用操作命令
 
 添加新组件后提交：
@@ -455,7 +397,6 @@ git add mcps/new-mcp index.json && git commit -m "feat: 添加 new-mcp"
 2. 填写服务器配置（command/args/env）
 3. 用 MCP Inspector（`npx @modelcontextprotocol/inspector`）获取所有工具名，填入 `tools` 数组
 4. 在 `index.json` 的 `mcps` 数组中添加条目（id/name/description/version/files）
-5. 评估是否需要在 `agent-capabilities.json` 中添加能力条目（type: `"mcp"`）
-6. 更新 `index.json` 顶层 `updatedAt` 时间戳
+5. 更新 `index.json` 顶层 `updatedAt` 时间戳
 
 Commit message 风格：`feat: 添加 xxx`、`fix: 修复 xxx`、`docs: 更新 xxx`。
