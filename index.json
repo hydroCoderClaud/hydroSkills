@@ -1,7 +1,7 @@
 {
   "version": 1,
   "name": "HydroSkills Registry",
-  "updatedAt": "2026-07-03T00:00:00Z",
+  "updatedAt": "2026-07-03T15:25:00Z",
   "skills": [
     {
       "id": "remotion-best-practices",
@@ -54,6 +54,41 @@
         "rules/voiceover.md"
       ],
       "updatedAt": "2026-07-03T00:00:00Z"
+    },
+    {
+      "id": "guizang-ppt-skill",
+      "name": "Guizang PPT Skill",
+      "description": "生成横向翻页网页 PPT（单 HTML 文件），含 WebGL 背景、章节幕封、数据大字报、图片网格等模板，支持电子杂志风与瑞士国际主义风",
+      "version": "1.0.0",
+      "author": "op7418 / 歸藏",
+      "tags": ["ppt", "presentation", "html", "slides", "webgl", "swiss-style"],
+      "files": [
+        "SKILL.md",
+        "assets/motion.min.js",
+        "assets/template.html",
+        "assets/template-swiss.html",
+        "assets/screenshot-backgrounds/style-a/dune.webp",
+        "assets/screenshot-backgrounds/style-a/forest-ink.webp",
+        "assets/screenshot-backgrounds/style-a/indigo-porcelain.webp",
+        "assets/screenshot-backgrounds/style-a/kraft-paper.webp",
+        "assets/screenshot-backgrounds/style-a/monocle-classic.webp",
+        "assets/screenshot-backgrounds/style-b/ikb-dot-gradient.webp",
+        "assets/screenshot-backgrounds/style-b/lemon-green-dot-shadow.webp",
+        "assets/screenshot-backgrounds/style-b/lemon-grid.webp",
+        "assets/screenshot-backgrounds/style-b/safety-orange-halftone.webp",
+        "references/checklist.md",
+        "references/components.md",
+        "references/image-prompts.md",
+        "references/layouts.md",
+        "references/layouts-swiss.md",
+        "references/screenshot-framing.md",
+        "references/swiss-layout-lock.md",
+        "references/swiss-map-component.md",
+        "references/themes.md",
+        "references/themes-swiss.md",
+        "scripts/validate-swiss-deck.mjs"
+      ],
+      "updatedAt": "2026-07-03T15:25:00Z"
     },
     {
       "id": "weixin-publisher",
