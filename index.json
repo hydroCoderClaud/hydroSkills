@@ -56,16 +56,6 @@
       "updatedAt": "2026-07-03T00:00:00Z"
     },
     {
-      "id": "remotion-video",
-      "name": "Remotion 视频创作",
-      "description": "使用 Remotion 框架制作视频，含环境检测与自动安装",
-      "version": "1.0.0",
-      "author": "HydroCoder",
-      "tags": ["video", "remotion", "react", "creative"],
-      "files": ["SKILL.md"],
-      "updatedAt": "2026-02-14T00:00:00Z"
-    },
-    {
       "id": "weixin-publisher",
       "name": "微信公众号发布助手",
       "description": "引导安装 weixin-publisher，配置 Codex/Claude Code MCP，并按草稿优先流程制作公众号文章",
