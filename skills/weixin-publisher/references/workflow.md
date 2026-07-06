@@ -69,6 +69,8 @@ Each theme coordinates these fields:
 
 - `titleColor` controls non-numeric headings.
 - `numberColor` controls numeric marker headings such as `# 1.5`.
+- `bodyColor` controls ordinary paragraph and list text.
+- `mutedColor` controls secondary text such as quotes, subtitles, and footers.
 - `headingBorderColor` controls heading decorative borders.
 - `dividerColor` controls horizontal dividers.
 - `quoteBorderColor` controls the quote/callout left border.
@@ -80,7 +82,7 @@ Each theme coordinates these fields:
 - `codeBlockBorderColor` controls code block borders.
 - `codeBlockBackgroundColor` controls code block background.
 - `codeBlockColor` controls code block text.
-- Ordinary body text and quote text stay low-saturation gray for readability.
+- Ordinary body text and quote text stay low-saturation for readability, but they are still derived from the selected theme or custom `themeColor`.
 - Do not ask for all colors by default; ask for a theme preset or one `themeColor` first, then override individual colors only when the user asks for advanced fine tuning.
 
 Font sizes can be customized when the user asks:
@@ -110,6 +112,8 @@ Use `create_sticker_draft_from_content` for structured card content:
   "title": "Sticker title",
   "subtitle": "Optional subtitle",
   "summary": "Short summary",
+  "contentMarkdown": "Optional themed body shown in the newspic draft.",
+  "themePreset": "wechat-green",
   "cards": [
     {
       "title": "Card title",
@@ -127,6 +131,7 @@ Use `create_sticker_draft` when local PNG/JPG files or existing image `mediaId`s
 {
   "title": "Sticker title",
   "digest": "Short digest",
+  "contentMarkdown": "Optional themed body shown in the newspic draft.",
   "images": [
     {
       "filePath": "./card-1.png",
@@ -137,6 +142,58 @@ Use `create_sticker_draft` when local PNG/JPG files or existing image `mediaId`s
   "fallbackToArticle": true
 }
 ```
+
+Use `update_sticker_draft` to revise an existing sticker/newspic draft:
+
+```json
+{
+  "mediaId": "existing draft media_id",
+  "sticker": {
+    "title": "Updated sticker title",
+    "contentMarkdown": "Updated themed body shown in the newspic draft.",
+    "themePreset": "rose-magenta",
+    "images": [
+      {
+        "filePath": "./updated-card-1.png",
+        "alt": "Updated card 1"
+      }
+    ]
+  }
+}
+```
+
+Do not use ordinary `update_draft` for sticker/newspic drafts. `update_draft` writes a normal `news` article payload; `update_sticker_draft` writes `article_type: "newspic"` with `image_info`.
+
+`fallbackToArticle` is only for creating a new sticker draft. Do not include it when calling `update_sticker_draft`; an existing `newspic` draft cannot be downgraded during update.
+
+Sticker theme behavior:
+
+- Sticker rendering uses the same theme model as ordinary articles.
+- `themePreset` supports `wechat-green`, `rose-magenta`, `soft-purple`, and `ocean-blue`; `warm-cream` is also kept for sticker compatibility.
+- `themeColor` derives a coordinated palette from one custom primary color, just like ordinary article rendering.
+- Explicit color overrides such as `titleColor`, `numberColor`, `dividerColor`, `headingBorderColor`, `inlineCodeBackgroundColor`, `linkColor`, and `codeBlockBackgroundColor` affect sticker SVG/PNG output, not only metadata.
+- Map color roles consistently: sticker title uses `titleColor`; body and bullet text use `bodyColor`; subtitles and footers use `mutedColor`; badge/accent uses `numberColor`; bullet dots use `linkColor`; the separator uses `dividerColor`; card border uses `headingBorderColor`; soft background uses `quoteBackgroundColor`; badge background uses `inlineCodeBackgroundColor`; card background uses `codeBlockBackgroundColor`.
+- Keep ordinary sticker body copy in an article-like theme-derived body style instead of tinting prose with the accent color.
+- The newspic draft `content` body also uses the ordinary article renderer when `contentMarkdown`, `content`, `summary`, or `digest` is provided. Prefer `contentMarkdown` for authored body copy; use `contentHtml` only for exact WeChat-compatible HTML control.
+
+## Sticker Layout Density Rules
+
+Sticker/newspic cards are final images, not editable article paragraphs. Optimize for visual breathing room:
+
+- Use one message per card. Avoid turning a card into a miniature long-form article.
+- Keep `body` short enough for 2 to 4 visual lines when possible.
+- Use 2 to 4 bullets per card. Prefer concise bullets over full sentences.
+- Keep a clear gap after `body` before the first bullet. The first green-dot row should read as a new list block, not as a continuation of the paragraph.
+- Keep the bullet group compact after that first gap: bullet rows should be readable, but not so loose that each dot feels like a separate section.
+- Avoid long mixed Chinese/English tokens when a shorter label works. If tool names are necessary, put one tool name per bullet.
+- Use `preview_sticker_images` before draft creation whenever the content is newly generated, has long titles, long bodies, mixed Chinese/English text, or more than three bullets.
+
+When generating HTML/SVG/image layouts outside the built-in renderer:
+
+- Use flow layout or measured text block heights.
+- Do not position subtitles, body text, or bullets with fixed coordinates that assume a single title line.
+- Treat title, subtitle, body, bullet list, footer, and page index as separate vertical blocks with explicit gaps.
+- If anything overlaps, wraps awkwardly, or feels cramped, revise the content or spacing before creating a draft.
 
 ## Markdown Structure For Built-In Design
 
@@ -208,6 +265,8 @@ Advanced color override example:
   "themePreset": "rose-magenta",
   "titleColor": "#c24d76",
   "numberColor": "#b33f69",
+  "bodyColor": "#5a4651",
+  "mutedColor": "#77636d",
   "headingBorderColor": "#e8bfd0",
   "dividerColor": "#f2d9e4",
   "quoteBorderColor": "#d86a92",

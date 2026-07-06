@@ -93,9 +93,23 @@ Use this path when the user asks for 贴图, sticker, newspic, image-card posts,
 2. Use `render_sticker_images` when the user only wants local PNG output.
 3. Use `create_sticker_draft_from_content` when the user gives structured text/cards and wants the tool to render PNGs, upload them, and create a WeChat draft.
 4. Use `create_sticker_draft` when the user already has local image files or existing image `mediaId`s.
-5. Set `fallbackToArticle: true` only when the user wants compatibility fallback if `newspic` is unavailable.
-6. After draft creation, call `get_draft` to verify `articleType`, `imageInfo`, and `imageMediaIds` when available.
-7. Keep draft-first behavior: do not call `submit_publish` unless the user explicitly asks to publish.
+5. Use `update_sticker_draft` when the user wants to revise an existing sticker/newspic draft. Do not use ordinary `update_draft` for newspic drafts, and do not set `fallbackToArticle` during update.
+6. Set `fallbackToArticle: true` only when creating a sticker draft and the user wants compatibility fallback if `newspic` is unavailable.
+7. After draft creation or update, call `get_draft` to verify `articleType`, `imageInfo`, and `imageMediaIds` when available.
+8. Keep draft-first behavior: do not call `submit_publish` unless the user explicitly asks to publish.
+
+Sticker layout rules:
+
+- Prefer airy image-card composition over dense article-like text.
+- Keep each card to one clear idea, one short body paragraph, and 2 to 4 concise bullets.
+- Leave visible breathing room between the body paragraph and the first green-dot bullet; do not let bullets look like a continuation of the paragraph.
+- Use the same theme model as ordinary articles: set `themePreset` or one custom `themeColor`, and let sticker titles, body text, secondary text, badges, dividers, bullet dots, borders, and soft backgrounds follow that palette.
+- Keep sticker body text visually aligned with ordinary article body text: theme-derived `bodyColor`, light font weight, readable line height, and no loud accent color for normal prose.
+- Keep the newspic draft body aligned with the same theme too: prefer `contentMarkdown` or structured `summary`/`digest` so the tool renders WeChat-compatible themed HTML instead of saving a bare plain-text body.
+- Keep the body-to-bullet gap generous, then keep bullet rows compact enough that the list reads as one visual group.
+- When hand-authoring HTML/SVG/image layouts, use flow layout or measured block heights instead of fixed overlapping coordinates.
+- When hand-authoring HTML/SVG/image layouts, apply the chosen `themePreset`, `themeColor`, or explicit color overrides to the generated image, not only to draft metadata.
+- Always inspect `preview_sticker_images` before creating a draft when content is newly generated or visually dense.
 
 Terminology:
 
@@ -125,6 +139,7 @@ Use these MCP tools as the normal path:
 - `render_sticker_images`
 - `preview_sticker_images`
 - `create_sticker_draft_from_content`
+- `update_sticker_draft`
 - `get_draft`
 - `list_drafts`
 - `submit_publish` only after explicit user confirmation
