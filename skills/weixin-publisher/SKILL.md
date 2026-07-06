@@ -7,6 +7,11 @@ description: Use when the user wants to install, configure, or use the weixin-pu
 
 Use this skill to give a user WeChat Official Account publishing capability through the `weixin-publisher` npm package and MCP server.
 
+Current content shapes:
+
+- Ordinary article: user-facing article draft, WeChat `news` draft.
+- Sticker / newspic: user-facing `sticker` flow, WeChat API `article_type: "newspic"`. These are the same content shape at different naming layers, not two separate stages.
+
 Default stance: make a draft first. Do not submit final publish unless the user clearly asks to publish.
 
 ## Setup Workflow
@@ -72,12 +77,31 @@ After MCP is available:
 7. If the user wants to inspect layout before creating a draft, call `preview_article`.
    - Explain that this is a local HTML pseudo-preview, not a WeChat backend preview.
    - Return the local `filePath` or `fileUrl` so the user can open it.
-8. If a cover is needed, follow [Cover Generation](references/cover-generation.md).
-9. Call `prepare_cover` for any local cover image.
-10. Call `create_draft`.
-11. Call `get_draft` to verify the saved title, digest, and body do not contain mojibake such as repeated `?`, `�`, `Ã`, or `ä¸`.
-12. Return the `draftMediaId`, `displayMessage`, and `userHint`.
-13. Only call `submit_publish` if the user explicitly asks for final publish.
+8. If the user wants a sticker/newspic post, use [Sticker Workflow](#sticker-workflow) instead of ordinary article creation.
+9. If a cover is needed, follow [Cover Generation](references/cover-generation.md).
+10. Call `prepare_cover` for any local cover image.
+11. Call `create_draft`.
+12. Call `get_draft` to verify the saved title, digest, and body do not contain mojibake such as repeated `?`, `�`, `Ã`, or `ä¸`.
+13. Return the `draftMediaId`, `displayMessage`, and `userHint`.
+14. Only call `submit_publish` if the user explicitly asks for final publish.
+
+## Sticker Workflow
+
+Use this path when the user asks for 贴图, sticker, newspic, image-card posts, or a concise swipe-like image post.
+
+1. Use `preview_sticker_images` when the user wants to inspect the local visual result first.
+2. Use `render_sticker_images` when the user only wants local PNG output.
+3. Use `create_sticker_draft_from_content` when the user gives structured text/cards and wants the tool to render PNGs, upload them, and create a WeChat draft.
+4. Use `create_sticker_draft` when the user already has local image files or existing image `mediaId`s.
+5. Set `fallbackToArticle: true` only when the user wants compatibility fallback if `newspic` is unavailable.
+6. After draft creation, call `get_draft` to verify `articleType`, `imageInfo`, and `imageMediaIds` when available.
+7. Keep draft-first behavior: do not call `submit_publish` unless the user explicitly asks to publish.
+
+Terminology:
+
+- Say `sticker` to the user.
+- Use `newspic` only when explaining the WeChat API-layer draft type.
+- Do not describe `sticker` and `newspic` as two separate content forms.
 
 Never call `delete_draft` unless the user explicitly asks to delete a specific draft.
 
@@ -97,6 +121,10 @@ Use these MCP tools as the normal path:
 - `prepare_cover`
 - `upload_cover`
 - `create_draft`
+- `create_sticker_draft`
+- `render_sticker_images`
+- `preview_sticker_images`
+- `create_sticker_draft_from_content`
 - `get_draft`
 - `list_drafts`
 - `submit_publish` only after explicit user confirmation

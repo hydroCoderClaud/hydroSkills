@@ -12,6 +12,8 @@ Default to draft creation. This is the safest normal path:
 
 Only call `submit_publish` when the user explicitly says to publish, formally publish, submit, or send the article live.
 
+For sticker/newspic posts, use `preview_sticker_images`, `render_sticker_images`, `create_sticker_draft`, or `create_sticker_draft_from_content` instead of forcing the content into a normal article.
+
 ## Local Pseudo Preview
 
 Use `preview_article` when the user wants to see the layout before creating a WeChat draft.
@@ -21,6 +23,8 @@ Use `preview_article` when the user wants to see the layout before creating a We
 - It does not call WeChat APIs, upload images, create drafts, or send preview messages.
 - It is useful for checking theme color, font size, numeric headings, quotes, lists, code blocks, and approximate mobile width.
 - It is not the WeChat backend preview. Final rendering can still differ slightly in the Official Account editor and on mobile WeChat.
+
+Use `preview_sticker_images` for sticker/newspic local preview. It renders local PNG sticker images and writes a WeChat-style local HTML preview page without calling WeChat APIs.
 
 ## Asking for Content
 
@@ -92,6 +96,47 @@ Comment behavior:
 - Set `needOpenComment: false` only when the user explicitly asks to disable comments.
 - `onlyFansCanComment` controls whether only followers can comment. Default: `false`.
 - Automatic featured comment selection is not currently exposed by this tool as an API-controlled field.
+
+## Sticker / Newspic Input Shape
+
+Use the sticker path when the user asks for 贴图, sticker, newspic, image cards, or a concise image-led post.
+
+`sticker` is the user-facing product term. `newspic` is the WeChat API `article_type`. They are not separate stages.
+
+Use `create_sticker_draft_from_content` for structured card content:
+
+```json
+{
+  "title": "Sticker title",
+  "subtitle": "Optional subtitle",
+  "summary": "Short summary",
+  "cards": [
+    {
+      "title": "Card title",
+      "body": "Card body",
+      "badge": "Optional badge"
+    }
+  ],
+  "fallbackToArticle": true
+}
+```
+
+Use `create_sticker_draft` when local PNG/JPG files or existing image `mediaId`s are already available:
+
+```json
+{
+  "title": "Sticker title",
+  "digest": "Short digest",
+  "images": [
+    {
+      "filePath": "./card-1.png",
+      "alt": "Card 1",
+      "caption": "Optional caption"
+    }
+  ],
+  "fallbackToArticle": true
+}
+```
 
 ## Markdown Structure For Built-In Design
 
