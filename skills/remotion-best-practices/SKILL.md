@@ -1,17 +1,30 @@
 ---
 name: remotion-best-practices
-description: Best practices for Remotion - Video creation in React
+description: Best practices for Remotion video creation in React, with a persistent reusable Remotion workbench for generated videos. Use when creating, rendering, previewing, editing, or troubleshooting Remotion videos, motion graphics, animations, captions, audio, visual effects, video assets, or Remotion project/runtime setup. Prefer REMOTION_WORKBENCH_HOME so dependencies are installed once and final outputs are exported to the requested target path.
 metadata:
   tags: remotion, video, react, animation, composition
 ---
 
 ## When to use
 
-Use this skills whenever you are dealing with Remotion code to obtain the domain-specific knowledge.
+Use this skill whenever you are dealing with Remotion code to obtain the domain-specific knowledge.
+
+## Persistent workbench first
+
+For generated videos, use a persistent Remotion workbench instead of creating a new Remotion project in the current directory.
+
+- `REMOTION_WORKBENCH_HOME` points to the reusable Remotion project.
+- Render commands run inside `REMOTION_WORKBENCH_HOME`.
+- Final artifacts are exported to the user's requested output path.
+- Do not create `node_modules`, `package.json`, or transient Remotion projects in the current task directory unless the user explicitly asks for a local project there.
+
+When creating, rendering, previewing, exporting, installing, binding, or repairing generated-video workflow, first load [references/workbench.md](references/workbench.md), then use `scripts/ensure-workbench.mjs` or the platform wrapper scripts.
 
 ## New project setup
 
-When in an empty folder or workspace with no existing Remotion project, scaffold one using:
+Use this only when the user explicitly wants a standalone Remotion project in the current workspace, or when editing an existing local Remotion app. Otherwise use the persistent workbench above.
+
+When in an empty folder or workspace with no existing Remotion project and the user requested a local project, scaffold one using:
 
 ```bash
 npx create-video@latest --yes --blank --no-tailwind my-video

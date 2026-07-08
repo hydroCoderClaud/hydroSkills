@@ -1,17 +1,18 @@
 {
   "version": 1,
   "name": "HydroSkills Registry",
-  "updatedAt": "2026-07-08T09:00:00Z",
+  "updatedAt": "2026-07-08T09:30:00Z",
   "skills": [
     {
       "id": "remotion-best-practices",
       "name": "Remotion 最佳实践",
-      "description": "Remotion 视频开发领域知识库，涵盖合成、时序、音频、字幕、转场、特效等最佳实践，处理 Remotion 代码时自动触发",
-      "version": "1.0.0",
+      "description": "Remotion 视频开发领域知识库与持久 workbench 工作流，涵盖合成、时序、音频、字幕、转场、特效等最佳实践。支持一次安装依赖到 REMOTION_WORKBENCH_HOME，后续在固定目录渲染并导出到目标路径",
+      "version": "1.1.0",
       "author": "ynzys",
       "tags": ["video", "remotion", "react", "animation", "best-practices"],
       "files": [
         "SKILL.md",
+        "references/workbench.md",
         "rules/3d.md",
         "rules/assets/charts-bar-chart.tsx",
         "rules/assets/text-animations-typewriter.tsx",
@@ -51,9 +52,12 @@
         "rules/trimming.md",
         "rules/video-layout.md",
         "rules/videos.md",
-        "rules/voiceover.md"
+        "rules/voiceover.md",
+        "scripts/ensure-workbench.mjs",
+        "scripts/ensure-workbench.ps1",
+        "scripts/ensure-workbench.sh"
       ],
-      "updatedAt": "2026-07-03T00:00:00Z"
+      "updatedAt": "2026-07-08T09:30:00Z"
     },
     {
       "id": "guizang-ppt-skill",
