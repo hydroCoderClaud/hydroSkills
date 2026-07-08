@@ -1,0 +1,4 @@
+interface:
+  display_name: "OpenMontage"
+  short_description: "检查、安装引导并使用 OpenMontage 制作视频"
+  default_prompt: "使用 OpenMontage 检查环境并按流水线制作视频。"

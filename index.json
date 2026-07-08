@@ -1,7 +1,7 @@
 {
   "version": 1,
   "name": "HydroSkills Registry",
-  "updatedAt": "2026-07-06T09:07:04Z",
+  "updatedAt": "2026-07-08T00:00:00Z",
   "skills": [
     {
       "id": "remotion-best-practices",
@@ -89,6 +89,23 @@
         "scripts/validate-swiss-deck.mjs"
       ],
       "updatedAt": "2026-07-03T15:25:00Z"
+    },
+    {
+      "id": "openmontage",
+      "name": "OpenMontage 视频制作",
+      "description": "OpenMontage 安装/环境检查与视频制作工作流 Skill。以 OPENMONTAGE_HOME 作为唯一安装目录来源，支持绑定已有安装、安装引导、环境诊断，并在环境通过后按 OpenMontage pipeline 制作视频",
+      "version": "0.1.1",
+      "author": "ynzys",
+      "tags": ["video", "openmontage", "pipeline", "install", "workflow"],
+      "files": [
+        "SKILL.md",
+        "references/install.md",
+        "references/workflow.md",
+        "scripts/detect-install.ps1",
+        "scripts/detect-install.sh",
+        "agents/openai.yaml"
+      ],
+      "updatedAt": "2026-07-08T00:00:00Z"
     },
     {
       "id": "weixin-publisher",
