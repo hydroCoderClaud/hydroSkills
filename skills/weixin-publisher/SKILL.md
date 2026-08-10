@@ -1,6 +1,6 @@
 ---
 name: weixin-publisher
-description: Use when the user wants to install, configure, or use the weixin-publisher npm package and MCP server to create WeChat Official Account drafts or publish articles from an agent. Covers HydroDesktop, Claude Code, and Codex setup, credential injection, cover preparation, draft-first workflows, and safe publish behavior.
+description: Use when the user wants to install, configure, or use the weixin-publisher npm package and MCP server to create WeChat Official Account drafts or publish articles from an agent. Covers secure local account setup, HydroDesktop, Claude Code, and Codex MCP setup, cover preparation, draft-first workflows, and safe publish behavior.
 ---
 
 # Weixin Publisher
@@ -20,23 +20,24 @@ When the user wants to install or configure WeChat publishing:
 
 1. Detect the host OS and available tools:
    - Run `node --version` and `npm --version`.
-   - Run `npx -y --package weixin-publisher wop --help` to verify the npm package can be fetched.
-   - If the user prefers global install, run `npm install -g weixin-publisher`, then verify `wop --help` and `wop-mcp`.
-2. Ask for only the missing required credentials:
-   - `WECHAT_APP_ID`
-   - `WECHAT_APP_SECRET`
+   - Prefer a pinned global install: `npm install -g weixin-publisher@<version>`.
+   - Verify both `wop --help` and `wop-mcp` from the same global installation.
+2. Check local account state with `wop account:list`.
+   - If no account exists, ask the user to open a separate local terminal and run `wop account:add <account-id>`.
+   - The account command collects `AppID` normally and `AppSecret` through masked terminal input twice for confirmation. It shows one `*` per entered character; never ask for the secret in chat and never pass it in MCP arguments or environment variables.
+   - If an account exists but its credential is missing, use `wop account:edit <account-id> --replace-secret` in the local terminal.
 3. Ask which host to configure:
    - HydroDesktop
    - Claude Code
    - Codex
    - multiple hosts
-4. Prefer `npx` unless the user explicitly wants global install.
-5. For HydroDesktop, prefer the hydroSkills marketplace path: install the `微信公众号发布助手` skill, then install the `微信公众号发布 MCP`, and replace the placeholder `WECHAT_APP_ID` / `WECHAT_APP_SECRET`.
+4. Configure MCP with the global `wop-mcp` entry and no credential environment variables.
+5. For HydroDesktop, prefer the hydroSkills marketplace path: install the `微信公众号发布助手` skill, then install the `微信公众号发布 MCP`; account credentials remain in the local OS secure store.
 6. For Claude Code, prefer `claude mcp add --scope user` from [MCP Config](references/mcp-config.md) instead of manually editing JSON.
 7. For Codex, generate or write the MCP config using the templates in [MCP Config](references/mcp-config.md).
 8. For Claude Code, ask the user to enable global tool permission for this MCP after restart; see [MCP Config](references/mcp-config.md).
 9. Tell the user to restart the HydroDesktop, Claude Code, or Codex session after config changes.
-10. After restart, call the MCP `doctor` tool first.
+10. After restart, call `list_accounts`, choose the requested `accountId`, then call `doctor` with that account ID.
 
 If Node.js or npm is missing, stop and tell the user to install Node.js LTS first.
 
@@ -44,7 +45,7 @@ If Node.js or npm is missing, stop and tell the user to install Node.js LTS firs
 
 After MCP is available:
 
-1. Call `doctor`.
+1. Call `list_accounts`, choose an account ID, then call `doctor` with that account ID.
 2. Ask the user what article to make:
    - topic/title
    - target audience
@@ -131,6 +132,7 @@ Read MCP results in this order:
 Use these MCP tools as the normal path:
 
 - `doctor`
+- `list_accounts`
 - `preview_article`
 - `prepare_cover`
 - `upload_cover`
@@ -147,7 +149,9 @@ Use these MCP tools as the normal path:
 
 ## Config Safety
 
-Treat `WECHAT_APP_SECRET` as a secret. Do not print it back to the user except as a masked value.
+Treat `AppSecret` as a secret. Do not print it back to the user except as a masked value.
+
+The MCP server does not accept `WECHAT_APP_ID` or `WECHAT_APP_SECRET` environment variables in the normal setup. Account metadata is stored in the user config directory and secrets are stored by the OS keyring (Windows Credential Manager, macOS Keychain, or the platform keyring). Account CRUD is a local CLI workflow, never an MCP workflow.
 
 When editing config files, prefer:
 

@@ -1,274 +1,89 @@
 # MCP Config Reference
 
-Package name: `weixin-publisher`
+Package: `weixin-publisher`
 
-Preferred MCP server key: `weixin-publisher`
+The normal setup has no credential environment variables. Install one pinned global package version, configure accounts from a separate local terminal, and let the MCP host launch the matching `wop-mcp` entry.
 
-Required environment variables:
-
-- `WECHAT_APP_ID`
-- `WECHAT_APP_SECRET`
-
-Recommended environment variables:
-
-- `WECHAT_PUBLISH_MODE=draft`
-- `WECHAT_REQUEST_TIMEOUT_MS=15000`
-
-## Install Mode Choice
-
-Default recommendation: `npx`.
-
-Use `npx` when:
-
-- The user wants the simplest setup.
-- The user does not want global npm installs.
-- The host can access the internet when starting MCP.
-
-Use global install when:
-
-- The user wants faster startup.
-- The user wants less network dependence.
-- The user understands PATH/global npm bin issues.
-
-Global install command:
+## 1. Install and configure accounts
 
 ```bash
-npm install -g weixin-publisher
+npm install -g weixin-publisher@<version>
+wop --help
+wop-mcp
 ```
 
-## Claude Code
+Run account management in a real local terminal, never in an MCP conversation:
 
-Prefer configuring Claude Code with the CLI instead of hand-editing JSON. Ask the user for `WECHAT_APP_ID` and `WECHAT_APP_SECRET` first, then run one of these commands.
+```bash
+wop account:add brand-a --label "Brand A"
+wop account:list
+wop account:doctor brand-a
+wop account:edit brand-a --replace-secret
+wop account:set-default brand-a
+wop account:remove brand-a --yes
+```
 
-Use `--scope user` for normal user-level setup. Claude Code stores this in the appropriate user-level Claude config, commonly the user's home `.claude.json`; do not create a random project `.mcp.json` unless the user explicitly wants project-local setup.
+`account:add` and `account:edit --replace-secret` display one `*` per `AppSecret` character and ask for it twice to confirm the value. Account metadata is stored in the user config directory; the secret is stored in the OS keyring. The secret is never a command argument, MCP environment variable, tool parameter, or tool result.
 
-Windows, npx:
+## 2. Claude Code
+
+Use the CLI rather than hand-editing JSON. The command contains only the MCP executable:
+
+Windows:
 
 ```powershell
-claude mcp add --scope user weixin-publisher `
-  -e WECHAT_APP_ID=your_app_id `
-  -e WECHAT_APP_SECRET=your_app_secret `
-  -e WECHAT_PUBLISH_MODE=draft `
-  -e WECHAT_REQUEST_TIMEOUT_MS=15000 `
-  -- npx.cmd -y --package weixin-publisher wop-mcp
+claude mcp add --scope user weixin-publisher -- wop-mcp.cmd
 ```
 
-Windows, global install:
-
-```powershell
-claude mcp add --scope user weixin-publisher `
-  -e WECHAT_APP_ID=your_app_id `
-  -e WECHAT_APP_SECRET=your_app_secret `
-  -e WECHAT_PUBLISH_MODE=draft `
-  -e WECHAT_REQUEST_TIMEOUT_MS=15000 `
-  -- wop-mcp.cmd
-```
-
-Avoid `cmd /c` in `claude mcp add` on Windows. Some shells or argument parsers can rewrite `/c` into `C:/`, which breaks the MCP command. Use `npx.cmd` or `wop-mcp.cmd` directly instead.
-
-macOS/Linux, npx:
+macOS/Linux:
 
 ```bash
-claude mcp add --scope user weixin-publisher \
-  -e WECHAT_APP_ID=your_app_id \
-  -e WECHAT_APP_SECRET=your_app_secret \
-  -e WECHAT_PUBLISH_MODE=draft \
-  -e WECHAT_REQUEST_TIMEOUT_MS=15000 \
-  -- npx -y --package weixin-publisher wop-mcp
+claude mcp add --scope user weixin-publisher -- wop-mcp
 ```
 
-macOS/Linux, global install:
+After adding, restart Claude Code, verify with `claude mcp list`, call `list_accounts`, choose an `accountId`, and call `doctor` with that ID.
 
-```bash
-claude mcp add --scope user weixin-publisher \
-  -e WECHAT_APP_ID=your_app_id \
-  -e WECHAT_APP_SECRET=your_app_secret \
-  -e WECHAT_PUBLISH_MODE=draft \
-  -e WECHAT_REQUEST_TIMEOUT_MS=15000 \
-  -- wop-mcp
-```
+Avoid `cmd /c` in `claude mcp add` on Windows. Use `wop-mcp.cmd` directly.
 
-After adding, run:
+### Claude Code tool permissions
 
-```bash
-claude mcp list
-```
+Add `mcp__weixin-publisher__*` to the user-level `~/.claude/settings.json` `permissions.allow` list. Do not put this global permission in `settings.local.json`.
 
-### Claude Code Tool Permissions
+## 3. Codex config.toml
 
-Adding the MCP server only registers it. After restart, enable global tool permission for this MCP so the workflow can call its tools.
-
-Preferred setup:
-
-1. Restart Claude Code after `claude mcp add --scope user`.
-2. Add the tool wildcard to the user-level `~/.claude/settings.json`.
-3. Ask Claude Code to call `doctor`.
-
-Add this entry to `permissions.allow`:
-
-```text
-mcp__weixin-publisher__*
-```
-
-Example:
-
-```json
-{
-  "permissions": {
-    "allow": [
-      "mcp__weixin-publisher__*"
-    ]
-  }
-}
-```
-
-Do not write this global MCP tool permission to `settings.local.json`; that file is local/project-scoped and can make the global Claude Code setup look successful while other sessions still lack permission.
-
-If the user starts Claude Code from the command line and wants to pre-approve the tools for that session:
-
-```bash
-claude --allowedTools "mcp__weixin-publisher__*"
-```
-
-Use the exact MCP namespace shown by Claude Code if it differs.
-
-Only use JSON snippets below for manual review, migration, or when `claude mcp add` is unavailable.
-
-## Claude Code Manual JSON Reference
-
-Windows, npx:
-
-```json
-{
-  "mcpServers": {
-    "weixin-publisher": {
-      "command": "npx.cmd",
-      "args": ["-y", "--package", "weixin-publisher", "wop-mcp"],
-      "env": {
-        "WECHAT_APP_ID": "your_app_id",
-        "WECHAT_APP_SECRET": "your_app_secret",
-        "WECHAT_PUBLISH_MODE": "draft",
-        "WECHAT_REQUEST_TIMEOUT_MS": "15000"
-      }
-    }
-  }
-}
-```
-
-Windows, global install:
-
-```json
-{
-  "mcpServers": {
-    "weixin-publisher": {
-      "command": "wop-mcp.cmd",
-      "env": {
-        "WECHAT_APP_ID": "your_app_id",
-        "WECHAT_APP_SECRET": "your_app_secret",
-        "WECHAT_PUBLISH_MODE": "draft",
-        "WECHAT_REQUEST_TIMEOUT_MS": "15000"
-      }
-    }
-  }
-}
-```
-
-macOS/Linux, npx:
-
-```json
-{
-  "mcpServers": {
-    "weixin-publisher": {
-      "command": "npx",
-      "args": ["-y", "--package", "weixin-publisher", "wop-mcp"],
-      "env": {
-        "WECHAT_APP_ID": "your_app_id",
-        "WECHAT_APP_SECRET": "your_app_secret",
-        "WECHAT_PUBLISH_MODE": "draft",
-        "WECHAT_REQUEST_TIMEOUT_MS": "15000"
-      }
-    }
-  }
-}
-```
-
-macOS/Linux, global install:
-
-```json
-{
-  "mcpServers": {
-    "weixin-publisher": {
-      "command": "wop-mcp",
-      "env": {
-        "WECHAT_APP_ID": "your_app_id",
-        "WECHAT_APP_SECRET": "your_app_secret",
-        "WECHAT_PUBLISH_MODE": "draft",
-        "WECHAT_REQUEST_TIMEOUT_MS": "15000"
-      }
-    }
-  }
-}
-```
-
-## Codex config.toml
-
-Windows, npx:
-
-```toml
-[mcp_servers.weixin_publisher]
-command = "cmd"
-args = ["/c", "npx", "-y", "--package", "weixin-publisher", "wop-mcp"]
-startup_timeout_sec = 120
-
-[mcp_servers.weixin_publisher.env]
-WECHAT_APP_ID = "your_app_id"
-WECHAT_APP_SECRET = "your_app_secret"
-WECHAT_PUBLISH_MODE = "draft"
-WECHAT_REQUEST_TIMEOUT_MS = "15000"
-```
-
-Windows, global install:
+Windows:
 
 ```toml
 [mcp_servers.weixin_publisher]
 command = "cmd"
 args = ["/c", "wop-mcp"]
 startup_timeout_sec = 120
-
-[mcp_servers.weixin_publisher.env]
-WECHAT_APP_ID = "your_app_id"
-WECHAT_APP_SECRET = "your_app_secret"
-WECHAT_PUBLISH_MODE = "draft"
-WECHAT_REQUEST_TIMEOUT_MS = "15000"
 ```
 
-macOS/Linux, npx:
-
-```toml
-[mcp_servers.weixin_publisher]
-command = "npx"
-args = ["-y", "--package", "weixin-publisher", "wop-mcp"]
-startup_timeout_sec = 120
-
-[mcp_servers.weixin_publisher.env]
-WECHAT_APP_ID = "your_app_id"
-WECHAT_APP_SECRET = "your_app_secret"
-WECHAT_PUBLISH_MODE = "draft"
-WECHAT_REQUEST_TIMEOUT_MS = "15000"
-```
-
-macOS/Linux, global install:
+macOS/Linux:
 
 ```toml
 [mcp_servers.weixin_publisher]
 command = "wop-mcp"
 startup_timeout_sec = 120
-
-[mcp_servers.weixin_publisher.env]
-WECHAT_APP_ID = "your_app_id"
-WECHAT_APP_SECRET = "your_app_secret"
-WECHAT_PUBLISH_MODE = "draft"
-WECHAT_REQUEST_TIMEOUT_MS = "15000"
 ```
 
-After writing Codex or Claude Code config, tell the user to restart the current session so the MCP server is loaded.
+There is intentionally no `[mcp_servers.weixin_publisher.env]` section for account credentials. After saving, restart Codex, call `list_accounts`, select an account, and call `doctor` with its `accountId`.
+
+## 4. Account selection workflow
+
+Use this sequence for any remote operation:
+
+```text
+list_accounts
+  -> choose accountId
+  -> doctor(accountId)
+  -> create_draft(accountId, ...)
+  -> get_draft(accountId, ...)
+```
+
+Pass the same `accountId` to draft, material, publish, and status tools. Local-only rendering and cover preparation do not need an account ID.
+
+## 5. Migration
+
+Older MCP entries that contain `WECHAT_APP_ID` or `WECHAT_APP_SECRET` should be removed after the account is registered with `wop account:add`. Do not copy `AppSecret` into the new MCP config. Keep the MCP server on a fixed package version and upgrade intentionally.

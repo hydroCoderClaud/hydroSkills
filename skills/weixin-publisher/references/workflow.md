@@ -4,7 +4,8 @@
 
 Default to draft creation. This is the safest normal path:
 
-1. `doctor`
+1. `list_accounts`
+2. `doctor(accountId)`
 2. `preview_article` if the user wants to inspect local layout before touching WeChat
 3. `prepare_cover` if using a local cover image
 4. `create_draft`

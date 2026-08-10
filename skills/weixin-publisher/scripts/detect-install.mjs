@@ -38,10 +38,8 @@ const checks = {
   node: run('node', ['--version']),
   npm: run('npm', ['--version']),
   wop: run('wop', ['--help']),
-  wopMcp: run('wop-mcp', ['--help']),
-  npxPackage: run('npm', ['exec', '-y', '--package', 'weixin-publisher', '--', 'wop', '--help'], {
-    cwd: os.homedir(),
-  }),
+  wopMcpPath: run(process.platform === 'win32' ? 'where' : 'which', ['wop-mcp']),
+  accounts: run('wop', ['account:list']),
 };
 
 const summary = {
@@ -52,8 +50,15 @@ const summary = {
   hasNpm: checks.npm.ok,
   npmVersion: checks.npm.stdout,
   hasGlobalWop: checks.wop.ok,
-  hasGlobalWopMcp: checks.wopMcp.ok,
-  canUseNpxPackage: checks.npxPackage.ok,
+  hasGlobalWopMcp: checks.wopMcpPath.ok,
+  hasConfiguredAccounts: checks.accounts.ok && (() => {
+    try {
+      const result = JSON.parse(checks.accounts.stdout);
+      return Array.isArray(result.accounts) && result.accounts.length > 0;
+    } catch {
+      return false;
+    }
+  })(),
 };
 
 console.log(JSON.stringify({ summary, checks }, null, 2));
