@@ -1,6 +1,6 @@
 {
   "weixin-publisher": {
-    "command": "wop-mcp",
+    "command": "wop-mcp.cmd",
     "tools": ["*"]
   }
 }

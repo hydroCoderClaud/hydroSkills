@@ -1,7 +1,7 @@
 {
   "version": 1,
   "name": "HydroSkills Registry",
-  "updatedAt": "2026-08-10T05:09:47Z",
+  "updatedAt": "2026-08-10T06:30:00Z",
   "skills": [
     {
       "id": "remotion-best-practices",
@@ -98,7 +98,7 @@
       "id": "weixin-publisher",
       "name": "微信公众号发布助手",
       "description": "引导安装 weixin-publisher，通过 CLI 安全管理多个公众号账号，配置 Codex/Claude Code MCP，并按草稿优先流程制作公众号文章和贴图/newspic 草稿",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "author": "ynzys",
       "tags": ["wechat", "weixin", "official-account", "mcp", "publisher", "sticker", "newspic"],
       "files": [
@@ -155,7 +155,7 @@
       "id": "weixin-publisher",
       "name": "微信公众号发布 MCP",
       "description": "基于 weixin-publisher 的微信公众号发布 MCP。支持从 Agent 选择已配置账号并创建文章草稿和贴图/newspic 草稿、更新/查询/删除草稿、准备封面、上传图片，并在明确确认后提交正式发布。使用全局安装的 wop-mcp 启动；先通过 CLI 管理多个账号及凭据。",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "author": "ynzys",
       "tags": ["mcp", "wechat", "weixin", "official-account", "publisher", "draft", "sticker", "newspic"],
       "files": ["weixin-publisher.mcp.json"]

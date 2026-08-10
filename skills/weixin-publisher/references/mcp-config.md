@@ -25,7 +25,34 @@ wop account:remove brand-a --yes
 
 `account:add` and `account:edit --replace-secret` display one `*` per `AppSecret` character and ask for it twice to confirm the value. Account metadata is stored in the user config directory; the secret is stored in the OS keyring. The secret is never a command argument, MCP environment variable, tool parameter, or tool result.
 
-## 2. Claude Code
+## 2. HydroDesktop
+
+Prefer installing the marketplace MCP entry. Its JSON may include `tools`; keep that field in the market entry because HydroDesktop uses it for internal marketplace recognition:
+
+```json
+{
+  "weixin-publisher": {
+    "command": "wop-mcp.cmd",
+    "tools": ["*"]
+  }
+}
+```
+
+If the user manually creates the MCP config, do not include `tools` and do not add an empty `args: []`:
+
+```json
+{
+  "weixin-publisher": {
+    "command": "wop-mcp.cmd"
+  }
+}
+```
+
+For macOS/Linux manual config, use `wop-mcp` instead of `wop-mcp.cmd`.
+
+After adding the MCP, enable tool authorization in HydroDesktop: open ability management, enter from the wrench icon, find the `weixin-publisher` MCP row, and click the tool authorization button.
+
+## 3. Claude Code
 
 Use the CLI rather than hand-editing JSON. The command contains only the MCP executable:
 
@@ -49,7 +76,7 @@ Avoid `cmd /c` in `claude mcp add` on Windows. Use `wop-mcp.cmd` directly.
 
 Add `mcp__weixin-publisher__*` to the user-level `~/.claude/settings.json` `permissions.allow` list. Do not put this global permission in `settings.local.json`.
 
-## 3. Codex config.toml
+## 4. Codex config.toml
 
 Windows:
 
@@ -70,7 +97,7 @@ startup_timeout_sec = 120
 
 There is intentionally no `[mcp_servers.weixin_publisher.env]` section for account credentials. After saving, restart Codex, call `list_accounts`, select an account, and call `doctor` with its `accountId`.
 
-## 4. Account selection workflow
+## 5. Account selection workflow
 
 Use this sequence for any remote operation:
 
@@ -84,6 +111,6 @@ list_accounts
 
 Pass the same `accountId` to draft, material, publish, and status tools. Local-only rendering and cover preparation do not need an account ID.
 
-## 5. Migration
+## 6. Migration
 
 Older MCP entries that contain `WECHAT_APP_ID` or `WECHAT_APP_SECRET` should be removed after the account is registered with `wop account:add`. Do not copy `AppSecret` into the new MCP config. Keep the MCP server on a fixed package version and upgrade intentionally.

@@ -33,6 +33,9 @@ When the user wants to install or configure WeChat publishing:
    - multiple hosts
 4. Configure MCP with the global `wop-mcp` entry and no credential environment variables.
 5. For HydroDesktop, prefer the hydroSkills marketplace path: install the `微信公众号发布助手` skill, then install the `微信公众号发布 MCP`; account credentials remain in the local OS secure store.
+   - Marketplace MCP JSON may include `tools`; keep it because HydroDesktop uses it as an internal marketplace recognition field.
+   - If the user manually adds MCP JSON, use only `command` (`wop-mcp.cmd` on Windows, `wop-mcp` on macOS/Linux). Do not add `args: []`, `tools`, or credential `env`.
+   - After adding the MCP, tell the user to open HydroDesktop ability management, enter from the wrench icon, find the `weixin-publisher` MCP row, and click its tool authorization button.
 6. For Claude Code, prefer `claude mcp add --scope user` from [MCP Config](references/mcp-config.md) instead of manually editing JSON.
 7. For Codex, generate or write the MCP config using the templates in [MCP Config](references/mcp-config.md).
 8. For Claude Code, ask the user to enable global tool permission for this MCP after restart; see [MCP Config](references/mcp-config.md).
