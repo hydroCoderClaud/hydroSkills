@@ -4,6 +4,8 @@ Package: `weixin-publisher`
 
 The normal setup has no credential environment variables. Install one pinned global package version, configure accounts from a separate local terminal, and let the MCP host launch the matching `wop-mcp` entry.
 
+For relative local file paths, a host may set the optional non-secret `WOP_WORKSPACE_ROOT` environment variable to a real local directory. `wop-mcp` uses it as the workspace root for local inputs and default outputs; without it, the process working directory remains the root. A virtual agent-only path is not valid here.
+
 ## 1. Install and configure accounts
 
 ```bash
@@ -85,6 +87,9 @@ Windows:
 command = "cmd"
 args = ["/c", "wop-mcp"]
 startup_timeout_sec = 120
+
+[mcp_servers.weixin_publisher.env]
+WOP_WORKSPACE_ROOT = 'C:\workspace\work\daily'
 ```
 
 macOS/Linux:
@@ -95,7 +100,7 @@ command = "wop-mcp"
 startup_timeout_sec = 120
 ```
 
-There is intentionally no `[mcp_servers.weixin_publisher.env]` section for account credentials. After saving, restart Codex, call `list_accounts`, select an account, and call `doctor` with its `accountId`.
+`WOP_WORKSPACE_ROOT` is optional; remove that `env` table when the process working directory should remain the root. There is intentionally no account credential in `[mcp_servers.weixin_publisher.env]`. After saving, restart Codex, call `list_accounts`, select an account, and call `doctor` with its `accountId`.
 
 ## 5. Account selection workflow
 

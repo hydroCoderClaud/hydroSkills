@@ -9,6 +9,14 @@ Preferred cover workflow:
 
 Use text-to-image APIs when the user explicitly asks for an illustrative, photographic, painterly, or otherwise visually generated cover that cannot be made well with HTML/CSS alone.
 
+## Workspace and Generation Rules
+
+- For a newly generated cover, write source files and image output to the MCP process's current working directory by default.
+- When `WOP_WORKSPACE_ROOT` is set, use that real local directory as the publisher workspace root for relative paths and default outputs.
+- Do not guess or pass an Agent-only virtual path to a local MCP. If the host cannot provide a real local directory, ask the host for an absolute local path or ask the user to choose the output directory.
+- When a program is needed to generate an image, prefer Node.js and create the program under `create_wx_image` in the current working directory. Keep generated source and intermediate files there unless the user specifies another output directory.
+- After generation, pass the real local image path to `prepare_cover` and use its returned JPG for the draft.
+
 ## Design Defaults
 
 Keep WeChat covers simple and readable:
