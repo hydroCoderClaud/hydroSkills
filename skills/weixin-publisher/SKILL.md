@@ -83,9 +83,10 @@ After MCP is available:
    - Return the local `filePath` or `fileUrl` so the user can open it.
 8. If the user wants a sticker/newspic post, use [Sticker Workflow](#sticker-workflow) instead of ordinary article creation.
 9. If a cover is needed, follow [Cover Generation](references/cover-generation.md).
-   - Prefer the MCP process's current working directory for newly generated cover files. When `WOP_WORKSPACE_ROOT` is set, use that real local directory as the publisher workspace root.
-   - Never pass an Agent-only virtual path to a local MCP. If the host cannot provide a real local directory, ask the host for an absolute local path or ask the user to choose the output directory.
-   - If image-generation code is needed, prefer Node.js and create the program under `create_wx_image` in the current working directory.
+   - Use one workspace root: `WOP_WORKSPACE_ROOT` when set, otherwise the MCP process cwd.
+   - Create exactly one `<workspace-root>/create_wx_image` directory. Do not create nested or duplicate paths such as `<workspace-root>/workspace/create_wx_image`.
+   - If code is needed, use Node.js. Keep the script, HTML, screenshots, source image, and final cover in that one directory.
+   - Never pass an Agent virtual path to a local MCP. If no real local root is available, ask the host or user for an absolute local path.
 10. Call `prepare_cover` for any local cover image.
 11. Call `create_draft`.
 12. Call `get_draft` to verify the saved title, digest, and body do not contain mojibake such as repeated `?`, `�`, `Ã`, or `ä¸`.
